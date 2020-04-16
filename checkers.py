@@ -80,6 +80,7 @@ def play_game():
         moves = find_moves(board,team)
         made_move = make_move(moves,board,team)
         if made_move == "loss":
+            print counter
             print "game complete"
             con = False
         elif counter>10000:
