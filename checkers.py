@@ -104,7 +104,7 @@ def dec_dict_update(boards_moves,dec_dict):
         move_key = matrix_int(x[1],0)
         if board_key in dec_dict:
             if move_key in dec_dict[board_key]:
-                print boards moves
+                print boards_moves
                 if x[2] == 1:
                     dec_dict[board_key][move_key][0] += 1
                 elif x[2] == -1:
