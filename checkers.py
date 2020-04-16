@@ -92,7 +92,7 @@ def play_game():
 
 def main():
     while True:
-        game_results = play_game()
+        game_results = copy.deepcopy(play_game())
         print (game_results != 200)
         if game_results != 200:
             with open('files/game_results.txt','a') as f:
