@@ -72,7 +72,7 @@ def play_game():
             print("loss by team "+str(team))
             con = False
         else:
-            if counter > 200:
+            if counter > 300:
                 con = False
             else:
                 board = made_move[0]
