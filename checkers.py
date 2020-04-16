@@ -63,6 +63,7 @@ def play_game():
     con = True
     team = -1
     board = start_board
+    counter = 0
     while con:
         moves = find_moves(board,team)
         made_move = make_move(moves,start_board,team)
@@ -72,5 +73,7 @@ def play_game():
         else:
             board = made_move[0]
             team = team * -1
+            if counter//100 == counter/100.0:
+                print board
     
 play_game()
