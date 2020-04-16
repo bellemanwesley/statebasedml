@@ -99,6 +99,7 @@ def main():
                 game_results = play_game()
                 for x in game_results:
                     f.write(str(x)+"\n")
+        del game_results
                     
 main()
 
