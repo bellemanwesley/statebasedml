@@ -1,4 +1,6 @@
 from random import randint
+import copy
+
 start_board = [
     [0,1,0,1,0,1,0,1],
     [1,0,1,0,1,0,1,0],
@@ -62,7 +64,7 @@ def make_move(moves,board,team):
 def play_game():
     con = True
     team = -1
-    board = start_board
+    board = copy.copy(start_board)
     counter = 0
     while con:
         counter += 1
