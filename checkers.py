@@ -51,7 +51,6 @@ def find_moves(board,team):
         return ["reg",reg_moves]
 
 def make_move(moves,board,team):
-    print board
     if len(moves[1]) > 0:
         move_index = randint(0,len(moves[1])-1)
         my_move = moves[1][move_index]
