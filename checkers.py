@@ -103,8 +103,8 @@ def dec_dict_update(boards_moves,dec_dict):
         move_key = matrix_int(x[1],0)
         if board_key in dec_dict:
             if move_key in dec_dict[board_key]:
-                print board_key
-                print dec_dict[board_key]
+                #print board_key
+                #print dec_dict[board_key]
                 if x[2] == 1:
                     dec_dict[board_key][move_key][0] += 1
                 elif x[2] == -1:
@@ -128,8 +128,11 @@ def main():
     while True:
         game_results = play_game()
         if type(game_results) is not int:
+            print len(dec_dict)
+            print len(game_results)
             dec_dict = dec_dict_update(game_results,dec_dict)
         del game_results
+        over_counter += 1
                     
 main()
 
