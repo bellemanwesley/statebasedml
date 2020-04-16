@@ -66,7 +66,6 @@ def play_game():
     counter = 0
     boards_moves_plus = []
     boards_moves_minus = []    
-
     while con:
         counter += 1
         moves = find_moves(board,team)
@@ -77,8 +76,6 @@ def play_game():
             print "Loss by team " + str(team)
             con = False
         if counter>10000:
-            print "Timed out"
-            print made_move
             con = False
         else:
             if team == 1:
@@ -87,6 +84,15 @@ def play_game():
                 boards_moves_minus.append([board,made_move[1]])
             board = made_move[0]
             team = team * -1
-    return [boards_moves_plus,boards_moves_minus]
-                
-play_game()
+    for i in range(len(boards_moves_plus)):
+        boards_moves_plus[i] = boards_moves_plus[i] + [team*-1]
+    for i in range(len(boards_moves_minus)):
+        boards_moves_plus[i] = boards_moves_plus[i] + [team]        
+    return boards_moves_plus + boards_moves_minus
+
+def main():
+    while True:
+        with open('files/game_results.txt','a') as f:
+            game_results = play_game()
+            for x in game_results:
+                f.write(str(x)+"\n")
