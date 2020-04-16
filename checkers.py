@@ -79,5 +79,4 @@ def play_game():
             team = team * -1
     return [boards_moves_plus,boards_moves_minus]
                 
-while True:
-    play_game()
+play_game()
