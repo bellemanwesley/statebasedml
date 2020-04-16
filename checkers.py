@@ -120,6 +120,7 @@ def dec_dict_update(boards_moves,dec_dict):
                 dec_dict.update({board_key:{move_key:[2,1]}})
             elif x[2] == -1:
                 dec_dict.update({board_key:{move_key:[1,2]}})
+        print board_key
     return dec_dict
       
                 
