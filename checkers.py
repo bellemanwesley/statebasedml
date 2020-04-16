@@ -17,7 +17,7 @@ def matrix_int(matrix,adder):
     result = 0
     for j in range(len(matrix)):
         for k in range(len(matrix[j])):
-            result += (adder+matrix[j][k])*10^i
+            result += (adder+matrix[j][k])*(10**i)
             i += 1
     return result
                 
