@@ -128,8 +128,7 @@ def main():
     while True:
         game_results = play_game()
         if type(game_results) is not int:
-            print len(dec_dict)
-            print len(game_results)
+            print str(len(dec_dict)) + " , " + str(len(game_results))
             dec_dict = dec_dict_update(game_results,dec_dict)
         del game_results
         over_counter += 1
