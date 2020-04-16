@@ -62,7 +62,6 @@ def make_move(moves,board,team):
 def play_game():
     con = True
     team = -1
-    print start_board
     board = copy.deepcopy(start_board)
     counter = 0
     boards_moves_plus = []
