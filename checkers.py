@@ -88,7 +88,7 @@ def play_game():
     for i in range(len(boards_moves_plus)):
         boards_moves_plus[i] = boards_moves_plus[i] + [team*-1]
     for i in range(len(boards_moves_minus)):
-        boards_moves_plus[i] = boards_moves_plus[i] + [team]        
+        boards_moves_minus[i] = boards_moves_minus[i] + [team]        
     return boards_moves_plus + boards_moves_minus
 
 def main():
