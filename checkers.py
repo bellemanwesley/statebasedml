@@ -11,6 +11,15 @@ start_board = [
     [0,-1,0,-1,0,-1,0,-1],
     [-1,0,-1,0,-1,0,-1,0]
 ]
+
+def matrix_int(matrix,adder):
+    i = 0
+    result = 0
+    for j in matrix:
+        for k in matrix[j]:
+            result += (adder+matrix[j][k])*10^i
+            i += 1
+    return result
                 
 def find_moves(board,team):
     reg_moves = []
@@ -90,17 +99,37 @@ def play_game():
         boards_moves_minus[i] = boards_moves_minus[i] + [team]        
     return boards_moves_plus + boards_moves_minus
 
+def dec_dict_update(boards_moves,dec_dict):
+    for x in boards_moves:
+        board_key = matrix_int(x[0],2)
+        move_key = matrix_int(x[1],0)
+        if board_key in dec_dict:
+            if move_key in dec_dict[board_key]:
+                if x[2] == 1:
+                    dec_dict[board_key][move_key][0] += 1
+                elif x[2] == -1:
+                    dec_dict[board_key][move_key][1] += 1
+            else:
+                if x[2] == 1:
+                    dec_dict[board_key][move_key] = [2,1]
+                elif x[2] == -1:
+                    dec_dict[board_key][move_key] += [1,2]
+        else:
+            if x[2] == 1:
+                dec_dict.update({board_key:{move_key:[2,1]}})
+            elif x[2] == -1:
+                dec_dict.update({board_key:{move_key:[1,2]}})
+    return dec_dict
+      
+                
 def main():
+    dec_dict = {}
     while True:
         game_results = play_game()
-        print type(game_results) is not int
         if type(game_results) is not int:
-            with open('files/game_results.txt','a') as f:
-                for x in game_results:
-                    f.write(str(x)+"\n")
+            dec_dict = dec_dict_update(game_results,dec_dict)
         del game_results
                     
 main()
-
 
                     
