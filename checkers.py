@@ -15,8 +15,8 @@ start_board = [
 def matrix_int(matrix,adder):
     i = 0
     result = 0
-    for j in matrix:
-        for k in matrix[j]:
+    for j in range(len(matrix)):
+        for k in range(len(matrix[j])):
             result += (adder+matrix[j][k])*10^i
             i += 1
     return result
