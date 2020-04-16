@@ -77,7 +77,7 @@ def play_game():
         elif counter>10000:
             print "timed out"
             con = False
-            return "timed out"
+            return 200
         else:
             if team == 1:
                 boards_moves_plus.append([board,made_move[1]])
@@ -94,8 +94,7 @@ def play_game():
 def main():
     while True:
         game_results = play_game()
-        print type(game_results)
-        if type(game_results) is not str:
+        if game_results != 200:
             with open('files/game_results.txt','a') as f:
                 game_results = play_game()
                 for x in game_results:
