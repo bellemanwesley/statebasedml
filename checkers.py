@@ -17,8 +17,6 @@ def find_moves(board,team):
     take_moves = []
     for i in range(8):
         for j in range(8):
-            print board
-            print team
             if board[i][j] == team:
                 for k in [-1,1]:
                     if i+team in range(8) and j+k in range(8):
@@ -73,7 +71,8 @@ def play_game():
         counter += 1
         moves = find_moves(board,team)
         made_move = make_move(moves,board,team)
-        if counter>1000:#made_move == "loss":
+        
+        if counter>1000 or made_move == "loss":
             print made_move
             con = False
         else:
