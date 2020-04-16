@@ -83,7 +83,7 @@ def play_game():
             print counter
             print "game complete"
             con = False
-        elif counter>10000:
+        elif counter>100:
             print "timed out"
             con = False
             return 200
