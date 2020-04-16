@@ -134,6 +134,7 @@ def main():
             print len(dec_dict)
         del game_results
                     
-main()
+#main()
+print matrix_int(start_board)
 
                     
