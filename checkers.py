@@ -135,6 +135,6 @@ def main():
         del game_results
                     
 #main()
-print matrix_int(start_board)
+print matrix_int(start_board,2)
 
                     
