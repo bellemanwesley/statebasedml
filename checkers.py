@@ -71,12 +71,13 @@ def play_game():
         counter += 1
         moves = find_moves(board,team)
         made_move = make_move(moves,board,team)
-        if made_move == "loss":
+        if counter>5:#made_move == "loss":
             con = False
         else:
-            boards_moves.append([board,made_move[1]])
+            print made_move
             board = made_move[0]
             team = team * -1
+    return [boards_moves_plus][boards_moves_minus]
                 
 while True:
     play_game()
