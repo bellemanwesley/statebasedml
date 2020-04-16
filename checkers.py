@@ -1,3 +1,4 @@
+from random import randint
 start_board = [
     [0,1,0,1,0,1,0,1],
     [1,0,1,0,1,0,1,0],
@@ -36,10 +37,24 @@ def find_moves(board,team):
                                     if board[i+2*l][j+2*k] == 0:
                                         take_moves.append([[i,j],[i+2*l,j+2*k]])
     if len(take_moves) > 0:
-        return take_moves
+        return ["take",take_moves]
     else:
-        return reg_moves
-                
-                
+        return ["reg",reg_moves]
+
+def make_move(moves,board,team):
+    if len(moves[1]) > 0:
+        move_index = randint(0,len(moves)-1)
+        my_move = moves[1][move_index]
+        board[my_move[0][0]][my_move[0][1]] = 0
+        board[my_move[1][0]][my_move[1][1]] = team
+        if moves[0] == "take":
+            enemy_x = (my_move[1][0] - my_move[0][0])/2 + my_move[0][0]
+            enemy_y = (my_move[1][1] - my_move[0][1])/2 + my_move[0][1]
+            board[enemy_x][enemy_y] = 0
+        return(board,my_move)
+    else:
+        return "loss"
     
-print(find_moves(start_board,-1))
+    
+moves = find_moves(start_board,1)
+print(make_move(moves,start_board,1))
