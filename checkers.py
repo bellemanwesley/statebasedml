@@ -72,6 +72,7 @@ def play_game():
         moves = find_moves(board,team)
         made_move = make_move(moves,board,team)
         if made_move == "loss":
+            print board
             print "Game Complete"
             print "Loss by team " + str(team)
             con = False
