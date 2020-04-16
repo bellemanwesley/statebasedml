@@ -63,7 +63,7 @@ def play_game():
     con = True
     team = -1
     print start_board
-    board = copy.copy(start_board)
+    board = copy.deepcopy(start_board)
     counter = 0
     boards_moves_plus = []
     boards_moves_minus = []    
