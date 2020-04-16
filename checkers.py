@@ -67,6 +67,7 @@ def play_game():
             con = False
         else:
             board = made_move[0]
+            print board
             team = team * -1
     
 play_game()
