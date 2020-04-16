@@ -51,6 +51,10 @@ def make_move(moves,board,team):
             enemy_x = (my_move[1][0] - my_move[0][0])/2 + my_move[0][0]
             enemy_y = (my_move[1][1] - my_move[0][1])/2 + my_move[0][1]
             board[enemy_x][enemy_y] = 0
+        if team == -1 and my_move[1][0] == 0:
+            board[my_move[1][0]][my_move[1][1]] = -2
+        elif team == 1 and my_move[1][0] == 7:
+            board[my_move[1][0]][my_move[1][1]] = 2
         return[board,my_move]
     else:
         return "loss"
