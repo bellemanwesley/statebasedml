@@ -72,9 +72,9 @@ def play_game():
             print("loss by team "+str(team))
             con = False
         else:
+            if counter > 200:
+                play_game()
             board = made_move[0]
             team = team * -1
-            if counter//100 == counter/100.0:
-                print board
                 
 play_game()
