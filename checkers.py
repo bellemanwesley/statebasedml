@@ -58,7 +58,7 @@ def make_move(moves,board,team):
 def play_game():
     con = True
     team = -1
-    board = start_bard
+    board = start_board
     while con:
         moves = find_moves(board,team)
         made_move = make_move(moves,start_board,team)
