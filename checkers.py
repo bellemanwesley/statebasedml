@@ -95,7 +95,7 @@ def main():
     while True:
         game_results = play_game()
         print type(game_results)
-        if type(game_results) not str:
+        if type(game_results) is not str:
             with open('files/game_results.txt','a') as f:
                 game_results = play_game()
                 for x in game_results:
