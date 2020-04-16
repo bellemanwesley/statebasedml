@@ -82,9 +82,9 @@ def play_game():
             con = False
         else:
             if team == 1:
-                board_moves_plus.append([board,made_move[1]])
+                boards_moves_plus.append([board,made_move[1]])
             elif team == -1:
-                board_moves_minus.append([board,made_move[1]])
+                boards_moves_minus.append([board,made_move[1]])
             board = made_move[0]
             team = team * -1
     return [boards_moves_plus,boards_moves_minus]
