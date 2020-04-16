@@ -71,7 +71,7 @@ def play_game():
         counter += 1
         moves = find_moves(board,team)
         made_move = make_move(moves,board,team)
-        if counter>100:#made_move == "loss":
+        if counter>1000:#made_move == "loss":
             print made_move
             con = False
         else:
