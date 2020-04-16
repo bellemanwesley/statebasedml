@@ -62,7 +62,6 @@ def make_move(moves,board,team):
 def play_game():
     con = True
     team = -1
-    print board
     print start_board
     board = copy.copy(start_board)
     counter = 0
