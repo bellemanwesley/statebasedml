@@ -51,6 +51,7 @@ def find_moves(board,team):
         return ["reg",reg_moves]
 
 def make_move(moves,board,team):
+    print board
     if len(moves[1]) > 0:
         move_index = randint(0,len(moves[1])-1)
         my_move = moves[1][move_index]
@@ -122,6 +123,7 @@ def dec_dict_update(boards_moves,dec_dict):
                 
 def main():
     dec_dict = {}
+    over_counter = 0
     while True:
         game_results = play_game()
         if type(game_results) is not int:
