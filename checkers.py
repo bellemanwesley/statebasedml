@@ -80,10 +80,8 @@ def play_game():
         moves = find_moves(board,team)
         made_move = make_move(moves,board,team)
         if made_move == "loss":
-            print "game complete"
             con = False
         elif counter>100:
-            print "timed out"
             con = False
             return 200
         else:
@@ -101,7 +99,6 @@ def play_game():
 
 def dec_dict_update(boards_moves,dec_dict):
     for x in boards_moves:
-        print dec_dict
         board_key = matrix_int(x[0],2)
         move_key = matrix_int(x[1],0)
         if board_key in dec_dict:
@@ -127,11 +124,8 @@ def main():
     dec_dict = {}
     while True:
         game_results = play_game()
-        print game_results
         if type(game_results) is not int:
             dec_dict = dec_dict_update(game_results,dec_dict)
-            print len(game_results)
-            print len(dec_dict)
         del game_results
                     
 main()
