@@ -73,7 +73,7 @@ def play_game():
         if made_move == "loss":
             print "game complete"
             con = False
-        if counter>10000:
+        elif counter>10000:
             print "timed out"
             con = False
             return "timed out"
