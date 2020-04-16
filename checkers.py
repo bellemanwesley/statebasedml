@@ -42,4 +42,4 @@ def find_moves(board,team):
                 
                 
     
-print(find_moves(start_board,1))
+print(find_moves(start_board,-1))
