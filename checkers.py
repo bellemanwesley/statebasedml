@@ -97,4 +97,7 @@ def main():
                 for x in game_results:
                     f.write(str(x)+"\n")
                     
+main()
+
+
                     
