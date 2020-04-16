@@ -35,8 +35,7 @@ def find_moves(board,team):
                                 if i+2*team in range(8) and j+2*k in range(8):
                                     if board[i+2*l][j+2*k] == 0:
                                         take_moves.append([[i,j],[i+2*l,j+2*k]])
-                   
-	if len(take_moves) > 0:
+    if len(take_moves) > 0:
         return take_moves
     else:
         return reg_moves
