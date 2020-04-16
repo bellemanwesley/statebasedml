@@ -93,8 +93,8 @@ def play_game():
 def main():
     while True:
         game_results = copy.deepcopy(play_game())
-        print (game_results != 200)
-        if game_results != 200:
+        print type(game_results) is not int
+        if type(game_results) is not int:
             with open('files/game_results.txt','a') as f:
                 game_results = play_game()
                 for x in game_results:
