@@ -69,3 +69,4 @@ def play_game():
             board = made_move[0]
             team = team * -1
     
+play_game()
