@@ -101,7 +101,7 @@ def play_game():
 
 def dec_dict_update(boards_moves,dec_dict):
     for x in boards_moves:
-        print x
+        print dec_dict
         board_key = matrix_int(x[0],2)
         move_key = matrix_int(x[1],0)
         if board_key in dec_dict:
