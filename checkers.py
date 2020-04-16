@@ -127,10 +127,11 @@ def main():
     dec_dict = {}
     while True:
         game_results = play_game()
-        if type(game_results) is not int:
+        print game_results
+        '''if type(game_results) is not int:
             dec_dict = dec_dict_update(game_results,dec_dict)
             print len(game_results)
-            print len(dec_dict)
+            print len(dec_dict)'''
         del game_results
                     
 main()
