@@ -64,6 +64,9 @@ def play_game():
     team = -1
     board = copy.copy(start_board)
     counter = 0
+    boards_moves_plus = []
+    boards_moves_minus = []    
+
     while con:
         counter += 1
         moves = find_moves(board,team)
@@ -71,6 +74,7 @@ def play_game():
         if made_move == "loss":
             con = False
         else:
+            boards_moves.append([board,made_move[1]])
             board = made_move[0]
             team = team * -1
                 
