@@ -17,6 +17,8 @@ def find_moves(board,team):
     take_moves = []
     for i in range(8):
         for j in range(8):
+            print board
+            print team
             if board[i][j] == team:
                 for k in [-1,1]:
                     if i+team in range(8) and j+k in range(8):
