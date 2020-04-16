@@ -77,7 +77,7 @@ def play_game():
             print made_move
             board = made_move[0]
             team = team * -1
-    return [boards_moves_plus][boards_moves_minus]
+    return [boards_moves_plus,boards_moves_minus]
                 
 while True:
     play_game()
