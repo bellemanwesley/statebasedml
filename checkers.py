@@ -73,8 +73,10 @@ def play_game():
             con = False
         else:
             if counter > 200:
-                play_game()
-            board = made_move[0]
-            team = team * -1
+                con = False
+            else:
+                board = made_move[0]
+                team = team * -1
                 
-play_game()
+while True:
+    play_game()
