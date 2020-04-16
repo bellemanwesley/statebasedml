@@ -92,11 +92,10 @@ def play_game():
 
 def main():
     while True:
-        game_results = copy.deepcopy(play_game())
+        game_results = play_game()
         print type(game_results) is not int
         if type(game_results) is not int:
             with open('files/game_results.txt','a') as f:
-                game_results = play_game()
                 for x in game_results:
                     f.write(str(x)+"\n")
         del game_results
