@@ -94,6 +94,7 @@ def play_game():
 def main():
     while True:
         game_results = play_game()
+        print type(game_results)
         if type(game_results) is list:
             with open('files/game_results.txt','a') as f:
                 game_results = play_game()
