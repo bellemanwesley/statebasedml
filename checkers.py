@@ -71,12 +71,10 @@ def play_game():
         moves = find_moves(board,team)
         made_move = make_move(moves,board,team)
         if made_move == "loss":
-            print board
-            print "Game Complete"
-            print "Loss by team " + str(team)
             con = False
         if counter>10000:
             con = False
+            return "timed out"
         else:
             if team == 1:
                 boards_moves_plus.append([board,made_move[1]])
@@ -92,7 +90,11 @@ def play_game():
 
 def main():
     while True:
-        with open('files/game_results.txt','a') as f:
-            game_results = play_game()
-            for x in game_results:
-                f.write(str(x)+"\n")
+        game_results = play_game()
+        if game_results != "timed out":
+            with open('files/game_results.txt','a') as f:
+                game_results = play_game()
+                for x in game_results:
+                    f.write(str(x)+"\n")
+                    
+                    
