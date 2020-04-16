@@ -11,8 +11,6 @@ start_board = [
     [0,-1,0,-1,0,-1,0,-1],
     [-1,0,-1,0,-1,0,-1,0]
 ]
-
-remaining = [12,12]
                 
 def find_moves(board,team):
     reg_moves = []
