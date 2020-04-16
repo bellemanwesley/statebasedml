@@ -71,8 +71,10 @@ def play_game():
         moves = find_moves(board,team)
         made_move = make_move(moves,board,team)
         if made_move == "loss":
+            print "game complete"
             con = False
         if counter>10000:
+            print "timed out"
             con = False
             return "timed out"
         else:
