@@ -72,13 +72,14 @@ def play_game():
         made_move = make_move(moves,start_board,team)
         if made_move == "loss":
             print("loss by team "+str(team))
+            print counter
             con = False
         else:
-            if counter > 300:
-                con = False
-            else:
-                board = made_move[0]
-                team = team * -1
+            #if counter > 300:
+                #con = False
+            #else:
+            board = made_move[0]
+            team = team * -1
                 
 while True:
     play_game()
