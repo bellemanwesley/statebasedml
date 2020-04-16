@@ -55,6 +55,16 @@ def make_move(moves,board,team):
     else:
         return "loss"
     
+def play_game():
+    con = True
+    team = -1
+    board = start_bard
+    while con:
+        moves = find_moves(board,team)
+        made_move = make_move(moves,start_board,team)
+        if made_move == "loss":
+            print("loss by team "+str(team))
+        else:
+            board = made_move[0]
+            team = team * -1
     
-moves = find_moves(start_board,-1)
-print(make_move(moves,start_board,-1))
