@@ -88,9 +88,9 @@ def play_game():
             return 200
         else:
             if team == 1:
-                boards_moves_plus.append([board,made_move[1]])
+                boards_moves_plus.append(copy.deepcopy([board,made_move[1]]))
             elif team == -1:
-                boards_moves_minus.append([board,made_move[1]])
+                boards_moves_minus.append(copy.deepcopy([board,made_move[1]]))
             board = made_move[0]
             team = team * -1
     for i in range(len(boards_moves_plus)):
@@ -128,10 +128,10 @@ def main():
     while True:
         game_results = play_game()
         print game_results
-        '''if type(game_results) is not int:
+        if type(game_results) is not int:
             dec_dict = dec_dict_update(game_results,dec_dict)
             print len(game_results)
-            print len(dec_dict)'''
+            print len(dec_dict)
         del game_results
                     
 main()
