@@ -56,5 +56,5 @@ def make_move(moves,board,team):
         return "loss"
     
     
-moves = find_moves(start_board,1)
-print(make_move(moves,start_board,1))
+moves = find_moves(start_board,-1)
+print(make_move(moves,start_board,-1))
