@@ -14,12 +14,10 @@ start_board = [
 ]
 
 def matrix_int(matrix,adder):
-    i = 0
-    result = 0
+    result = ""
     for j in range(len(matrix)):
         for k in range(len(matrix[j])):
-            result += (adder+matrix[j][k])*(10**i)
-            i += 1
+            result += str(adder+matrix[j][k])
     return result
                 
 def find_moves(board,team):
