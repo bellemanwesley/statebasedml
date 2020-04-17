@@ -63,8 +63,8 @@ def make_move(moves,board,team,dec_dict):
                     move_weight = float(move_hist[0])/(move_hist[0]+move_hist[1])
                 else:
                     move_weight = 0.5
-            move_factor = move_weight * random()
-            moves_dec.append(move_factor)
+                move_factor = move_weight * random()
+                moves_dec.append(move_factor)
             move_index = moves_dec.index(max(moves_dec))
             print moves[1]
             print moves_dec
