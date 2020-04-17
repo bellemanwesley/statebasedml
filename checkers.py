@@ -1,5 +1,6 @@
 from random import randint
 import copy
+import json
 
 start_board = [
     [0,1,0,1,0,1,0,1],
@@ -125,13 +126,14 @@ def dec_dict_update(boards_moves,dec_dict):
 def main():
     dec_dict = {}
     over_counter = 0
-    while True:
+    while over_counter < 5:
         game_results = play_game()
         if type(game_results) is not int:
             dec_dict = dec_dict_update(game_results,dec_dict)
         del game_results
         over_counter += 1
-        print over_counter
+    with open('files/game_results.txt','w+') as f:
+        json.dump(dec_dict,f)
                     
 main()
 
