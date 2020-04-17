@@ -1,4 +1,5 @@
 from random import random
+from random import randint
 import copy
 import json
 
@@ -52,19 +53,22 @@ def find_moves(board,team):
 def make_move(moves,board,team,dec_dict):
     if len(moves[1]) > 0:
         board_int = matrix_int(board,2)
-        dec_moves = dec_dict[board_int]
-        moves_dec = []
-        for x in moves[1]:
-            move_int = matrix_int(x)
-            if move_int in dec_moves:
-                move_hist = dec_moves[move_int]
-                move_weight = float(move_hist[0])/(move_hist[0]+move_hist[1])
-            else:
-                move_weight = 0.5
+        if board_int in dec_dict:
+            dec_moves = dec_dict[board_int]
+            moves_dec = []
+            for x in moves[1]:
+                move_int = matrix_int(x)
+                if move_int in dec_moves:
+                    move_hist = dec_moves[move_int]
+                    move_weight = float(move_hist[0])/(move_hist[0]+move_hist[1])
+                    else:
+                        move_weight = 0.5
             move_factor = move_weight * random()
             moves_dec.append(move_factor)
-        print moves_dec
-        move_index = moves_dec.index(max(moves_dec))
+            print moves_dec
+        	move_index = moves_dec.index(max(moves_dec))
+        else:
+            move_index = randint(0,len(moves[1]-1))
         my_move = moves[1][move_index]
         board[my_move[0][0]][my_move[0][1]] = 0
         board[my_move[1][0]][my_move[1][1]] = team
@@ -137,7 +141,7 @@ def dec_dict_update(boards_moves,dec_dict):
 def main():
     dec_dict = {}
     over_counter = 0
-    while over_counter < 5:
+    while over_counter < 10:
         game_results = play_game(dec_dict)
         if type(game_results) is not int:
             dec_dict = dec_dict_update(game_results,dec_dict)
