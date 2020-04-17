@@ -2,6 +2,7 @@ from random import random
 from random import randint
 import copy
 import json
+import sys
 
 start_board = [
     [0,1,0,1,0,1,0,1],
@@ -62,26 +63,14 @@ def smart_move(dec_moves,moves):
             move_factor = move_weight * random()
             moves_dec.append(move_factor)
     move_index = moves_dec.index(max(moves_dec))
+    return move_index
     
 def make_move(moves,board,team,dec_dict):
     if len(moves[1]) > 0:
         board_int = matrix_int(board,2)
         if board_int in dec_dict:
             dec_moves = dec_dict[board_int]
-            moves_dec = []
-            for x in moves[1]:
-                move_int = matrix_int(x,0)
-                if move_int in dec_moves:
-                    move_hist = dec_moves[move_int]
-                    move_weight = float(move_hist[0])/(move_hist[0]+move_hist[1])
-                else:
-                    move_weight = 0.5
-                move_factor = move_weight * random()
-                moves_dec.append(move_factor)
-            move_index = moves_dec.index(max(moves_dec))
-            print moves[1]
-            print moves_dec
-            print move_index
+            move_index = smart_move(dec_moves,moves[1])
         else:
             move_index = randint(0,len(moves[1])-1)
         my_move = moves[1][move_index]
