@@ -50,6 +50,19 @@ def find_moves(board,team):
     else:
         return ["reg",reg_moves]
 
+def smart_move(dec_moves,moves):
+    moves_dec = []
+    for x in moves[1]:
+        move_int = matrix_int(x,0)
+        if move_int in dec_moves:
+            move_hist = dec_moves[move_int]
+            move_weight = float(move_hist[0])/(move_hist[0]+move_hist[1])
+            else:
+                move_weight = 0.5
+            move_factor = move_weight * random()
+            moves_dec.append(move_factor)
+    move_index = moves_dec.index(max(moves_dec))
+    
 def make_move(moves,board,team,dec_dict):
     if len(moves[1]) > 0:
         board_int = matrix_int(board,2)
