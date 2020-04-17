@@ -65,8 +65,9 @@ def make_move(moves,board,team,dec_dict):
                     move_weight = 0.5
             move_factor = move_weight * random()
             moves_dec.append(move_factor)
-            print moves_dec
             move_index = moves_dec.index(max(moves_dec))
+            print moves[1]
+            print moves_dec
             print move_index
         else:
             move_index = randint(0,len(moves[1])-1)
