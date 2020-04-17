@@ -68,7 +68,7 @@ def make_move(moves,board,team,dec_dict):
             print moves_dec
             move_index = moves_dec.index(max(moves_dec))
         else:
-            move_index = randint(0,len(moves[1]-1))
+            move_index = randint(0,len(moves[1])-1)
         my_move = moves[1][move_index]
         board[my_move[0][0]][my_move[0][1]] = 0
         board[my_move[1][0]][my_move[1][1]] = team
