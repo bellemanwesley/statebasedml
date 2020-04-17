@@ -65,6 +65,7 @@ def make_move(moves,board,team,dec_dict):
                 move_weight = 0.5
             move_factor = move_weight * random()
             moves_dec.append(move_factor)
+        print moves_dec
         move_index = moves_dec.index(max(moves_dec))
         my_move = moves[1][move_index]
         board[my_move[0][0]][my_move[0][1]] = 0
