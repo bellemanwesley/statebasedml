@@ -14,7 +14,6 @@ start_board = [
 ]
 
 def matrix_int(matrix,adder):
-    i = 0
     result = ""
     for j in range(len(matrix)):
         for k in range(len(matrix[j])):
