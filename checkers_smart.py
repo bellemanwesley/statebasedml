@@ -141,7 +141,7 @@ def dec_dict_update(boards_moves,dec_dict):
 def main():
     dec_dict = {}
     over_counter = 0
-    while over_counter < 10:
+    while over_counter < 100:
         game_results = play_game(dec_dict)
         if type(game_results) is not int:
             dec_dict = dec_dict_update(game_results,dec_dict)
