@@ -157,6 +157,7 @@ def check_command():
         exit(1)
     
 def main():
+    print sys.argv[0]
     max_counter = check_command()
     dec_dict = {}
     over_counter = 0
