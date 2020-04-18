@@ -26,13 +26,11 @@ def store_results(in_dict):
     del in_dict
     script_loc = script_location()
     for x in store_dict:
-        if os.path.exists(script_loc + x[0:16]) == False:
-            os.system("mkdir "+script_loc+x[0:16])
-        if os.path.exists(script_loc + x[0:16] + "/" + x[16:32]) == False:
-            os.system("mkdir "+script_loc + x[0:16] + "/" + x[16:32])
-        if os.path.exists(script_loc + x[0:16] + "/" + x[16:32] + "/" + x[32:48]) == False:
-            os.system("mkdir "+script_loc + x[0:16] + "/" + x[16:32] + "/" + x[32:48])
-        with open(script_loc + x[0:16] + "/" + x[16:32] + "/" + x[32:48] + "/" + x[48:64] + ".json",'w+') as f:
+        if os.path.exists(script_loc + "files/" + x[0:16]) == False:
+            os.system("mkdir "+script_loc+"files/" + x[0:16])
+        if os.path.exists(script_loc + "files/" x[0:16] + "/" + x[16:32]) == False:
+            os.system("mkdir "+script_loc + "files/" + x[0:16] + "/" + x[16:32])
+        with open(script_loc + "files/" + x[0:16] + "/" + x[16:32] + "/" + x[32:48] + ".json",'w+') as f:
             dec_contents = f.read()
             if dec_contents == "":
                 dec_contents = "{}"
