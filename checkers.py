@@ -38,7 +38,12 @@ def store_results(in_dict):
                 dec_contents = "{}"
             dec_dict = json.loads(dec_contents)
             for y in store_dict[x]:
-                dec_dict.update({y:store_dict[x][y]})
+                for z in store_dict[x][y]:
+                    if z in dec_dict[x][y]:
+                        dec_dict[x][y][z].update([dec_dict[x][y][z][0]+store_dict[x][y][z][0],dec_dict[x][y][z][1]+store_dict[x][y][z][1]])
+                    else:
+                        dec_dict[x][y].update({z:store_dict[x][y][z]})
+            json.dump(dec_dict,f)
 
                 
 
@@ -118,7 +123,7 @@ def make_move(moves,board,team):
     else:
         return "loss"
     
-def play_game(dec_dict):
+def play_game():
     con = True
     team = -1
     board = copy.deepcopy(start_board)
@@ -128,7 +133,7 @@ def play_game(dec_dict):
     while con:
         counter += 1
         moves = find_moves(board,team)
-        made_move = make_move(moves,board,team,dec_dict)
+        made_move = make_move(moves,board,team)
         if made_move == "loss":
             con = False
         elif counter>100:
