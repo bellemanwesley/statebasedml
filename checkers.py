@@ -3,6 +3,7 @@ from random import randint
 import copy
 import json
 import sys
+import os
 
 start_board = [
     [0,1,0,1,0,1,0,1],
@@ -155,9 +156,14 @@ def check_command():
     except:
         print fail_message
         exit(1)
+
+def script_location():
+    working_directory = os.popen("pwd").read()
+    relative_location_list = sys.argv[0].split("/")
+    relative_location = "/".join(relative_location_list[0:len(relative_location_list)-1])+"/"
+    return working_directory + "/" + relative_location
     
 def main():
-    print sys.argv[0]
     max_counter = check_command()
     dec_dict = {}
     over_counter = 0
@@ -167,7 +173,7 @@ def main():
             dec_dict = dec_dict_update(game_results,dec_dict)
         del game_results
         over_counter += 1
-    with open('files/game_results.json','w+') as f:
+    with open(script_location() + 'files/game_results.json','w+') as f:
         json.dump(dec_dict,f)
                     
 main()
