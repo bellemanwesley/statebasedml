@@ -20,9 +20,9 @@ def store_results(in_dict):
     store_dict = {}
     for x in in_dict:
         if x[0:48] in store_dict:
-            store_dict[x[0:48]].update({x[48:64]:dict[x]})
+            store_dict[x[0:48]].update({x[48:64]:in_dict[x]})
         else:
-            store_dict.update({x[0:48]:{x[48:64]:dict[x]}})
+            store_dict.update({x[0:48]:{x[48:64]:in_dict[x]}})
     del in_dict
     script_loc = script_location()
     for x in store_dict:
