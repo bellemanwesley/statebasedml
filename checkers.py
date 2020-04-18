@@ -68,7 +68,7 @@ def smart_move(dec_moves,moves):
 def make_move(moves,board,team,dec_dict):
     if len(moves[1]) > 0:
         board_int = matrix_int(board,2)
-        if sys.argv[1] = "smart" and board_int in dec_dict:
+        if sys.argv[1] == "smart" and board_int in dec_dict:
             dec_moves = dec_dict[board_int]
             move_index = smart_move(dec_moves,moves[1])
         else:
@@ -166,7 +166,7 @@ def main():
             dec_dict = dec_dict_update(game_results,dec_dict)
         del game_results
         over_counter += 1
-    with open('files/game_results.txt','w+') as f:
+    with open('files/game_results.json','w+') as f:
         json.dump(dec_dict,f)
                     
 main()
