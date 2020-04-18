@@ -172,6 +172,8 @@ def main():
             dec_dict = dec_dict_update(game_results,dec_dict)
         del game_results
         over_counter += 1
+        print sys.getsizeof(dec_dict)
+        print len(dec_dict)
     with open(script_location() + 'files/game_results.json','w+') as f:
         json.dump(dec_dict,f)
                     
