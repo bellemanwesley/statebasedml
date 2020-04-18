@@ -68,7 +68,7 @@ def smart_move(dec_moves,moves):
 def make_move(moves,board,team,dec_dict):
     if len(moves[1]) > 0:
         board_int = matrix_int(board,2)
-        if board_int in dec_dict:
+        if sys.argv[1] = "smart" and board_int in dec_dict:
             dec_moves = dec_dict[board_int]
             move_index = smart_move(dec_moves,moves[1])
         else:
@@ -141,11 +141,26 @@ def dec_dict_update(boards_moves,dec_dict):
                 dec_dict.update({board_key:{move_key:[1,2]}})
     return dec_dict
       
-                
+def check_command():
+    fail_message = ''' 
+    Fail message
+    '''
+    try:
+        result = int(sys.argv[2])
+        if sys.argv[1] not in ["smart","random"]:
+            print fail_message
+            exit(1)
+        else:
+            return result
+    except:
+        print fail_message
+        exit(1)
+    
 def main():
+    max_counter = check_command()
     dec_dict = {}
     over_counter = 0
-    while over_counter < 100:
+    while over_counter < max_counter:
         game_results = play_game(dec_dict)
         if type(game_results) is not int:
             dec_dict = dec_dict_update(game_results,dec_dict)
