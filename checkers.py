@@ -28,7 +28,7 @@ def store_results(in_dict):
     for x in store_dict:
         if os.path.exists(script_loc + "files/" + x[0:16]) == False:
             os.system("mkdir "+script_loc+"files/" + x[0:16])
-        if os.path.exists(script_loc + "files/" x[0:16] + "/" + x[16:32]) == False:
+        if os.path.exists(script_loc + "files/" + x[0:16] + "/" + x[16:32]) == False:
             os.system("mkdir "+script_loc + "files/" + x[0:16] + "/" + x[16:32])
         with open(script_loc + "files/" + x[0:16] + "/" + x[16:32] + "/" + x[32:48] + ".json",'w+') as f:
             dec_contents = f.read()
