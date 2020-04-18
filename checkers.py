@@ -92,11 +92,14 @@ def smart_move(dec_moves,moves):
     move_index = moves_dec.index(max(moves_dec))
     return move_index
     
-def make_move(moves,board,team,dec_dict):
+def make_move(moves,board,team):
     if len(moves[1]) > 0:
         board_int = matrix_int(board,2)
         if sys.argv[1] == "smart" and board_int in dec_dict:
-            dec_moves = dec_dict[board_int]
+            script_loc = script_location()
+            dec_moves_loc = "files/" + board_int[0:16] + "/" + board_int[16:32] + "/" + board_int[32:48] + "/" + board_int[48:64] + ".json"
+            with open(script_loc + dec_moves_loc,'r') as f:
+                dec_moves = json.loads(f.read())
             move_index = smart_move(dec_moves,moves[1])
         else:
             move_index = randint(0,len(moves[1])-1)
