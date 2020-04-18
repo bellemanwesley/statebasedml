@@ -100,7 +100,9 @@ def smart_move(dec_moves,moves):
 def make_move(moves,board,team):
     if len(moves[1]) > 0:
         board_int = matrix_int(board,2)
-        if sys.argv[1] == "smart" and board_int in dec_dict:
+        script_loc = script_location()
+        dec_moves_loc = "files/" + board_int[0:16] + "/" + board_int[16:32] + "/" + board_int[32:48] + "/" + board_int[48:64] + ".json"
+        if sys.argv[1] == "smart" and os.path.exists(script_loc+dec_moves_loc):
             script_loc = script_location()
             dec_moves_loc = "files/" + board_int[0:16] + "/" + board_int[16:32] + "/" + board_int[32:48] + "/" + board_int[48:64] + ".json"
             with open(script_loc + dec_moves_loc,'r') as f:
