@@ -163,16 +163,13 @@ def script_location():
     return working_directory + "/" + relative_location
     
 def main():
-    max_counter = check_command()
+    max_dict = check_command()
     dec_dict = {}
-    over_counter = 0
-    while over_counter < max_counter:
+    while len(dec_dict) < max_dict:
         game_results = play_game(dec_dict)
         if type(game_results) is not int:
             dec_dict = dec_dict_update(game_results,dec_dict)
         del game_results
-        over_counter += 1
-        print sys.getsizeof(dec_dict)
         print len(dec_dict)
     with open(script_location() + 'files/game_results.json','w+') as f:
         json.dump(dec_dict,f)
