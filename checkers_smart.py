@@ -68,7 +68,7 @@ def smart_move(dec_moves,moves):
 def make_move(moves,board,team,dec_dict):
     if len(moves[1]) > 0:
         board_int = matrix_int(board,2)
-        if sys.argv[1] = "smart" and board_int in dec_dict:
+        if sys.argv[1] == "smart" and board_int in dec_dict:
             dec_moves = dec_dict[board_int]
             move_index = smart_move(dec_moves,moves[1])
         else:
