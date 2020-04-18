@@ -158,7 +158,8 @@ def check_command():
         exit(1)
 
 def script_location():
-    working_directory = os.popen("pwd").readlines()[0]
+    working_directory = os.popen("pwd").read()
+    working_directory = working_directory[0:len(working_directory)-1]
     relative_location_list = sys.argv[0].split("/")
     relative_location = "/".join(relative_location_list[0:len(relative_location_list)-1])+"/"
     return working_directory + "/" + relative_location
