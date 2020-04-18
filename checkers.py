@@ -38,11 +38,14 @@ def store_results(in_dict):
                 dec_contents = "{}"
             dec_dict = json.loads(dec_contents)
             for y in store_dict[x]:
-                for z in store_dict[x][y]:
-                    if z in dec_dict[y]:
-                        dec_dict[y][z].update([dec_dict[y][z][0]+store_dict[x][y][z][0],dec_dict[y][z][1]+store_dict[x][y][z][1]])
-                    else:
-                        dec_dict[y].update({z:store_dict[x][y][z]})
+                if y in dec_dict:
+                    for z in store_dict[x][y]:
+                        if z in dec_dict[y]:
+                            dec_dict[y][z].update([dec_dict[y][z][0]+store_dict[x][y][z][0],dec_dict[y][z][1]+store_dict[x][y][z][1]])
+                        else:
+                            dec_dict[y].update({z:store_dict[x][y][z]})
+                else:
+                    dec_dict.update({y:store_dict[x][y]})
             json.dump(dec_dict,f)
 
                 
