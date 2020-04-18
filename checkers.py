@@ -55,6 +55,7 @@ def smart_move(dec_moves,moves):
     moves_dec = []
     for x in moves[1]:
         move_int = matrix_int(x,0)
+        print x
         if move_int in dec_moves:
             move_hist = dec_moves[move_int]
             move_weight = float(move_hist[0])/(move_hist[0]+move_hist[1])
