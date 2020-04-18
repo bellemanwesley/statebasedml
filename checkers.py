@@ -202,7 +202,7 @@ def main():
     while over_counter < max_counter:
         dec_dict = {}
         while len(dec_dict) < 100:
-            game_results = play_game(dec_dict)
+            game_results = play_game()
             if type(game_results) is not int:
                 dec_dict = dec_dict_update(game_results,dec_dict)
             print len(dec_dict)
