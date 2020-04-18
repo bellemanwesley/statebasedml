@@ -16,6 +16,32 @@ start_board = [
     [-1,0,-1,0,-1,0,-1,0]
 ]
 
+def store_results(in_dict):
+    store_dict = {}
+    for x in in_dict:
+        if x[0:48] in store_dict:
+            store_dict[x[0:48]].update({x[48:64]:dict[x]})
+        else:
+            store_dict.update({x[0:48]:{x[48:64]:dict[x]}})
+    del in_dict
+    script_loc = script_location()
+    for x in store_dict:
+        if os.path.exists(script_loc + x[0:16]) == False:
+            os.system("mkdir "+script_loc+x[0:16])
+        if os.path.exists(script_loc + x[0:16] + "/" + x[16:32]) == False:
+            os.system("mkdir "+script_loc + x[0:16] + "/" + x[16:32])
+        if os.path.exists(script_loc + x[0:16] + "/" + x[16:32] + "/" + x[32:48]) == False:
+            os.system("mkdir "+script_loc + x[0:16] + "/" + x[16:32] + "/" + x[32:48])
+        with open(script_loc + x[0:16] + "/" + x[16:32] + "/" + x[32:48] + "/" + x[48:64] + ".json",'w+') as f:
+            dec_contents = f.read()
+            if dec_contents == "":
+                dec_contents = "{}"
+            dec_dict = json.loads(dec_contents)
+            for y in store_dict[x]:
+                dec_dict.update({y:store_dict[x][y]})
+
+                
+
 def matrix_int(matrix,adder):
     result = ""
     for j in range(len(matrix)):
@@ -171,8 +197,7 @@ def main():
             dec_dict = dec_dict_update(game_results,dec_dict)
         del game_results
         print len(dec_dict)
-    with open(script_location() + 'files/game_results.json','w+') as f:
-        json.dump(dec_dict,f)
+
                     
 main()
 
