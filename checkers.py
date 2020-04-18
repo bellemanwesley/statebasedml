@@ -214,6 +214,7 @@ def main():
             del game_results
         store_results(dec_dict)
         del dec_dict
+        over_counter += 1
 
                     
 main()
