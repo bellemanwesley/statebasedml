@@ -189,14 +189,17 @@ def script_location():
     return working_directory + "/" + relative_location
     
 def main():
-    max_dict = check_command()
-    dec_dict = {}
-    while len(dec_dict) < max_dict:
-        game_results = play_game(dec_dict)
-        if type(game_results) is not int:
-            dec_dict = dec_dict_update(game_results,dec_dict)
-        del game_results
-        print len(dec_dict)
+    max_counter = check_command()
+    over_counter = 0
+    while over_counter < max_counter:
+        dec_dict = {}
+        while len(dec_dict) < 400000:
+            game_results = play_game(dec_dict)
+            if type(game_results) is not int:
+                dec_dict = dec_dict_update(game_results,dec_dict)
+            del game_results
+        store_results(dec_dict)
+        del dec_dict
 
                     
 main()
