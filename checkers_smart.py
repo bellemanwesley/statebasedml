@@ -58,10 +58,10 @@ def smart_move(dec_moves,moves):
         if move_int in dec_moves:
             move_hist = dec_moves[move_int]
             move_weight = float(move_hist[0])/(move_hist[0]+move_hist[1])
-            else:
-                move_weight = 0.5
-            move_factor = move_weight * random()
-            moves_dec.append(move_factor)
+        else:
+            move_weight = 0.5
+        move_factor = move_weight * random()
+        moves_dec.append(move_factor)
     move_index = moves_dec.index(max(moves_dec))
     return move_index
     

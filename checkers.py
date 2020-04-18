@@ -1,6 +1,8 @@
+from random import random
 from random import randint
 import copy
 import json
+import sys
 
 start_board = [
     [0,1,0,1,0,1,0,1],
@@ -49,9 +51,28 @@ def find_moves(board,team):
     else:
         return ["reg",reg_moves]
 
-def make_move(moves,board,team):
+def smart_move(dec_moves,moves):
+    moves_dec = []
+    for x in moves[1]:
+        move_int = matrix_int(x,0)
+        if move_int in dec_moves:
+            move_hist = dec_moves[move_int]
+            move_weight = float(move_hist[0])/(move_hist[0]+move_hist[1])
+            else:
+                move_weight = 0.5
+            move_factor = move_weight * random()
+            moves_dec.append(move_factor)
+    move_index = moves_dec.index(max(moves_dec))
+    return move_index
+    
+def make_move(moves,board,team,dec_dict):
     if len(moves[1]) > 0:
-        move_index = randint(0,len(moves[1])-1)
+        board_int = matrix_int(board,2)
+        if sys.argv[1] = "smart" and board_int in dec_dict:
+            dec_moves = dec_dict[board_int]
+            move_index = smart_move(dec_moves,moves[1])
+        else:
+            move_index = randint(0,len(moves[1])-1)
         my_move = moves[1][move_index]
         board[my_move[0][0]][my_move[0][1]] = 0
         board[my_move[1][0]][my_move[1][1]] = team
@@ -67,7 +88,7 @@ def make_move(moves,board,team):
     else:
         return "loss"
     
-def play_game():
+def play_game(dec_dict):
     con = True
     team = -1
     board = copy.deepcopy(start_board)
@@ -77,7 +98,7 @@ def play_game():
     while con:
         counter += 1
         moves = find_moves(board,team)
-        made_move = make_move(moves,board,team)
+        made_move = make_move(moves,board,team,dec_dict)
         if made_move == "loss":
             con = False
         elif counter>100:
@@ -102,6 +123,8 @@ def dec_dict_update(boards_moves,dec_dict):
         move_key = matrix_int(x[1],0)
         if board_key in dec_dict:
             if move_key in dec_dict[board_key]:
+                print board_key
+                print dec_dict[board_key]
                 if x[2] == 1:
                     dec_dict[board_key][move_key][0] += 1
                 elif x[2] == -1:
@@ -116,16 +139,29 @@ def dec_dict_update(boards_moves,dec_dict):
                 dec_dict.update({board_key:{move_key:[2,1]}})
             elif x[2] == -1:
                 dec_dict.update({board_key:{move_key:[1,2]}})
-            print board_key
-            print dec_dict
     return dec_dict
       
-                
+def check_command():
+    fail_message = ''' 
+    Fail message
+    '''
+    try:
+        result = int(sys.argv[2])
+        if sys.argv[1] not in ["smart","random"]:
+            print fail_message
+            exit(1)
+        else:
+            return result
+    except:
+        print fail_message
+        exit(1)
+    
 def main():
+    max_counter = check_command()
     dec_dict = {}
     over_counter = 0
-    while over_counter < 5:
-        game_results = play_game()
+    while over_counter < max_counter:
+        game_results = play_game(dec_dict)
         if type(game_results) is not int:
             dec_dict = dec_dict_update(game_results,dec_dict)
         del game_results
