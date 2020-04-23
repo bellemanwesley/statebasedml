@@ -1,5 +1,4 @@
-#just a comment
-#just another comment
+#removed those comments
 from random import random
 from random import randint
 import copy
