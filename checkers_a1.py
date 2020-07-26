@@ -1,4 +1,3 @@
-#removed those comments
 from random import random
 from random import randint
 import copy
@@ -7,7 +6,7 @@ import sys
 import os
 import time
 
-state_transform = 4
+state_transform = 3
 
 start_board = [
     [0,1,0,1,0,1,0,1],
@@ -21,34 +20,7 @@ start_board = [
 ]
 
 def store_results(in_dict):
-    store_dict = {}
-    for x in in_dict:
-        if x[0:48] in store_dict:
-            store_dict[x[0:48]].update({x[48:64]:in_dict[x]})
-        else:
-            store_dict.update({x[0:48]:{x[48:64]:in_dict[x]}})
-    del in_dict
-    script_loc = script_location()
-    for x in store_dict:
-        if os.path.exists(script_loc + "files/" + x[0:16]) == False:
-            os.system("mkdir "+script_loc+"files/" + x[0:16])
-        if os.path.exists(script_loc + "files/" + x[0:16] + "/" + x[16:32]) == False:
-            os.system("mkdir "+script_loc + "files/" + x[0:16] + "/" + x[16:32])
-        with open(script_loc + "files/" + x[0:16] + "/" + x[16:32] + "/" + x[32:48] + ".json",'w+') as f:
-            dec_contents = f.read()
-            if dec_contents == "":
-                dec_contents = "{}"
-            dec_dict = json.loads(dec_contents)
-            for y in store_dict[x]:
-                if y in dec_dict:
-                    for z in store_dict[x][y]:
-                        if z in dec_dict[y]:
-                            dec_dict[y][z].update([dec_dict[y][z][0]+store_dict[x][y][z][0],dec_dict[y][z][1]+store_dict[x][y][z][1]])
-                        else:
-                            dec_dict[y].update({z:store_dict[x][y][z]})
-                else:
-                    dec_dict.update({y:store_dict[x][y]})
-            json.dump(dec_dict,f)
+    pass
 
                 
 
@@ -262,21 +234,19 @@ def script_location():
 def main():
     max_counter = check_command()
     over_counter = 0
+    dec_dict = {}
+    start_time = time.time()
     while over_counter < max_counter:
-        dec_dict = {}
-        start_time = time.time()
-        while len(dec_dict) < 1000:
-            game_results = play_game()
-            if type(game_results) is not int:
-                dec_dict = dec_dict_update(game_results,dec_dict)
-            del game_results
-        #store_results(dec_dict)
-        #del dec_dict
+        game_results = play_game()
+        if type(game_results) is not int:
+            dec_dict = dec_dict_update(game_results,dec_dict)
+        del game_results
+        #store_results(dec_dict, over_counter, state_transform)
         over_counter += 1
-        print(time.time() - start_time)
-    print(dec_dict)
+    print(time.time() - start_time)
+    #print(dec_dict)
 
-                    
-main()
+for i in range(10):                    
+    main()
 
                     
