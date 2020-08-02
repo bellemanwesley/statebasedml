@@ -6,8 +6,6 @@ import sys
 import os
 import time
 
-state_transform = 3
-
 start_board = [
     [0,1,0,1,0,1,0,1],
     [1,0,1,0,1,0,1,0],
@@ -19,8 +17,10 @@ start_board = [
     [-1,0,-1,0,-1,0,-1,0]
 ]
 
-def store_results(in_dict):
-    pass
+def store_results(in_dict, tiempo, s_t):
+    file_name = "s" + str(s_t) + "t" + str(int(tiempo)) + ".json"
+    with open("/home/ec2-user/machine_learning/checkers/files/"+file_name,"w+") as f:
+        json.dump(in_dict,f)
 
                 
 
@@ -74,16 +74,11 @@ def smart_move(dec_moves,moves):
     move_index = moves_dec.index(max(moves_dec))
     return move_index
     
-def make_move(moves,board,team):
+def make_move(moves,board,team,dec_dict):
     if len(moves[1]) > 0:
-        board_int = matrix_int(board,2)
-        script_loc = script_location()
-        dec_moves_loc = "files/" + board_int[0:16] + "/" + board_int[16:32] + "/" + board_int[32:48] + "/" + board_int[48:64] + ".json"
-        if sys.argv[1] == "smart" and os.path.exists(script_loc+dec_moves_loc):
-            script_loc = script_location()
-            dec_moves_loc = "files/" + board_int[0:16] + "/" + board_int[16:32] + "/" + board_int[32:48] + "/" + board_int[48:64] + ".json"
-            with open(script_loc + dec_moves_loc,'r') as f:
-                dec_moves = json.loads(f.read())
+        board_int = state_getter(board)
+        if sys.argv[1] == "smart" and board_int in dec_dict:
+            dec_moves = dec_dict[board_int]
             move_index = smart_move(dec_moves,moves[1])
         else:
             move_index = randint(0,len(moves[1])-1)
@@ -102,7 +97,7 @@ def make_move(moves,board,team):
     else:
         return "loss"
     
-def play_game():
+def play_game(dec_dict):
     con = True
     team = -1
     board = copy.deepcopy(start_board)
@@ -112,7 +107,7 @@ def play_game():
     while con:
         counter += 1
         moves = find_moves(board,team)
-        made_move = make_move(moves,board,team)
+        made_move = make_move(moves,board,team, dec_dict)
         if made_move == "loss":
             con = False
         elif counter>100:
@@ -213,40 +208,30 @@ def check_command():
     fail_message = ''' 
     Fail message
     '''
-    try:
-        result = int(sys.argv[2])
-        if sys.argv[1] not in ["smart","random"]:
-            print(fail_message)
-            exit(1)
-        else:
-            return result
-    except:
+    if sys.argv[1] not in ["smart","random"]:
         print(fail_message)
         exit(1)
-
-def script_location():
-    working_directory = os.popen("pwd").read()
-    working_directory = working_directory[0:len(working_directory)-1]
-    relative_location_list = sys.argv[0].split("/")
-    relative_location = "/".join(relative_location_list[0:len(relative_location_list)-1])+"/"
-    return working_directory + "/" + relative_location
     
 def main():
-    max_counter = check_command()
-    over_counter = 0
     dec_dict = {}
+    over_start_time = time.time()
     start_time = time.time()
-    while over_counter < max_counter:
-        game_results = play_game()
+    while time.time() - over_start_time < 200:
+        if time.time() - start_time > 20:
+            store_results(dec_dict, (time.time() - over_start_time)//20, state_transform)
+            start_time = over_start_time % 20
+            print((state_transform*200+int((time.time() - over_start_time)))//80)
+        game_results = play_game(dec_dict)
         if type(game_results) is not int:
             dec_dict = dec_dict_update(game_results,dec_dict)
         del game_results
-        #store_results(dec_dict, over_counter, state_transform)
-        over_counter += 1
-    print(time.time() - start_time)
-    #print(dec_dict)
+    else:
+        store_results(dec_dict, (time.time() - over_start_time)//20, state_transform)
 
-for i in range(10):                    
+state_transform = 0
+
+for i in range(4):
+    state_transform = i+1
     main()
 
                     

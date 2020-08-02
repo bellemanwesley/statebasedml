@@ -1,0 +1,13 @@
+[Unit]
+Description=Keep Playing Checkers in the Background
+After=multi-user.target
+Conflicts=getty@tty1.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/ec2-user/machine_learning/checkers/checkers_compete.py
+StandardInput=tty-force
+User=ec2-user
+
+[Install]
+WantedBy=multi-user.target
