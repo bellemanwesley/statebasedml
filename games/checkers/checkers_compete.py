@@ -203,10 +203,10 @@ def main(j, k):
         s_t_2 = 4
     file_1 = "s"+str(s_t_1)+"t"+str(k)+".json"
     file_2 = "s"+str(s_t_2)+"t"+str(k)+".json"
-    f = open('/home/ec2-user/machine_learning/checkers/files/'+file_1,'r')
+    f = open('/home/ubuntu/machine_learning/checkers/files/'+file_1,'r')
     dec_dict_1 = json.load(f)
     f.close()
-    f = open('/home/ec2-user/machine_learning/checkers/files/'+file_2,'r')
+    f = open('/home/ubuntu/machine_learning/checkers/files/'+file_2,'r')
     dec_dict_2 = json.load(f)
     f.close()
     game_results = []
@@ -222,19 +222,20 @@ def main(j, k):
     print("Result - 1: "+str(minus_1_w)+" 2: "+str(plus_1_w))
     return([minus_1_w,plus_1_w])
 
-for l in range(97):
-    for j in range(2):
-        for k in range(10):
-            round_result = main(j, k)
-            f = open("/home/ec2-user/machine_learning/checkers/a1_results.csv","r")
-            results = f.read().split("\n")
-            f.close()
-            x = results[j*10+k].split(",")
-            x[0] = str(int(x[0])+round_result[0])
-            x[1] = str(int(x[1])+round_result[1])
-            x = ",".join(x)
-            results[j*10+k] = x
-            f = open("/home/ec2-user/machine_learning/checkers/a1_results.csv","w+")
-            f.write("\n".join(results))
-            f.close()
-                    
+#for l in range(95):
+for j in range(2):
+    for k in range(10):
+        round_result = main(j, k)
+        f = open("/home/ubuntu/machine_learning/checkers/a1_results.csv","r")
+        results = f.read().split("\n")
+        f.close()
+        x = results[j*10+k].split(",")
+        x[0] = str(int(x[0])+round_result[0])
+        x[1] = str(int(x[1])+round_result[1])
+        x = ",".join(x)
+        results[j*10+k] = x
+        f = open("/home/ubuntu/machine_learning/checkers/a1_results_temp.csv","w+")
+        f.write("\n".join(results))
+        f.close()
+        os.system("mv /home/ubuntu/machine_learning/checkers/a1_results_temp.csv /home/ubuntu/machine_learning/checkers/a1_results.csv")
+                        

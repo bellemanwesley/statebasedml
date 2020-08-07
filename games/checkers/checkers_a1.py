@@ -18,8 +18,8 @@ start_board = [
 ]
 
 def store_results(in_dict, tiempo, s_t):
-    file_name = "s" + str(s_t) + "t" + str(int(tiempo)) + ".json"
-    with open("/home/ec2-user/machine_learning/checkers/files/"+file_name,"w+") as f:
+    file_name = "s" + str(s_t) + "t" + str(int(tiempo-1)) + ".json"
+    with open("/home/ubuntu/machine_learning/checkers/files/"+file_name,"w+") as f:
         json.dump(in_dict,f)
 
                 
@@ -216,22 +216,21 @@ def main():
     dec_dict = {}
     over_start_time = time.time()
     start_time = time.time()
-    while time.time() - over_start_time < 200:
-        if time.time() - start_time > 20:
-            store_results(dec_dict, (time.time() - over_start_time)//20, state_transform)
-            start_time = over_start_time % 20
-            print((state_transform*200+int((time.time() - over_start_time)))//80)
+    while time.time() - over_start_time < 400:
+        if time.time() - start_time > 40:
+            store_results(dec_dict, (time.time() - over_start_time)//40, state_transform)
+            start_time = over_start_time % 40
         game_results = play_game(dec_dict)
         if type(game_results) is not int:
             dec_dict = dec_dict_update(game_results,dec_dict)
         del game_results
     else:
-        store_results(dec_dict, (time.time() - over_start_time)//20, state_transform)
+        store_results(dec_dict, (time.time() - over_start_time)//40, state_transform)
 
-state_transform = 0
-
-for i in range(4):
-    state_transform = i+1
-    main()
-
+for k in range(100):
+    state_transform = 0
+    for i in range(4):
+        state_transform = i+1
+        main()
+    os.system("/usr/bin/python3 /home/ubuntu/machine_learning/checkers/checkers_compete.py")
                     
