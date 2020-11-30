@@ -28,14 +28,18 @@ def decide_move(moves,strengths):
             strength = strengths[move]
         else:
             strength = [0,0]
+        print(move,strength)
         selector_list.append(float(strength[0]+1)/float(strength[1]+2))
     selector_var = random()*sum(selector_list)
     selected = False
+    print(selector_list)
+    print(selector_var)
     for i in range(len(selector_list)):
         if selector_var < selector_list[i] and not selected:
             move = moves[i]
             selected = True
         selector_var -= selector_list[i]
+    print(move)
     return move
 
 #STEP 4: Make the move
@@ -105,26 +109,37 @@ def play_game(all_strengths):
     game_choices = []
     while con:
         moves = find_moves(s)
+        print(moves)
         state = state_transform(s)
         if len(moves) > 0:
             if str(state) in all_strengths:
                 strengths = all_strengths[str(state)]
             else:
                 strengths = {}
-            move = decide_move(moves, strengths)
+            if team == -1:
+                move = decide_move(moves, strengths)
+            else:
+                print(strengths)
+                print("Your move")
+                row = input("Row: ")
+                col = input("Column: ")
+                move = [int(row),int(col)]
             game_choices.append([team,state,move])
             s, team = make_move(s, move, team)
             status = game_status(s)
+            for x in s:
+                print(x)
             con = status[0]
         else:
             #Handle what to do if there are no moves to make
             status = ["Tie",0]
             con = False
     winner = status[1]
+    print("The winner is",winner)
     return update_strengths(all_strengths, game_choices, winner)
     
 def main():
-    iterations = 1000000 #Number of times you want to play the game
+    iterations = 1 #Number of times you want to play the game
     with open("files/tictactoe.json","r") as f:
         all_strengths = json.load(f)
     for i in range(iterations):
