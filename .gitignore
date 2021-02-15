@@ -2,3 +2,4 @@ build/
 dist/
 statebasedml.egg-info/
 venv/
+.eggs/
