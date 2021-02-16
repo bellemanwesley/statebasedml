@@ -27,8 +27,8 @@ The statebasedml library has two classes:
 ```
 
 *bitfold has 2 methods*
-    - `gen_param()`: generates the parameters for a fold
-    - `fold()`: actually folds the input data
+   - `gen_param()`: generates the parameters for a fold
+   - `fold()`: actually folds the input data
 
 #### gen_param
 
@@ -43,7 +43,7 @@ The statebasedml library has two classes:
 ```
 
 *parameters*
-    - `size` *(integer)*: The number of bits of the largest sized string that you want to fold. You can determine the bit size of a string with `8*len(string)`
+   - `size` *(integer)*: The number of bits of the largest sized string that you want to fold. You can determine the bit size of a string with `8*len(string)`
 
 *response syntax*
 
@@ -73,10 +73,10 @@ The statebasedml library has two classes:
 ```
 
 *parameters*
-    - `value` *(string)*: This is simply the input value that you want to shrink.
-    - `new_size` *(integer)*: The number of bits of the new string that you want to be generated. If you want to output strings of length `l` then this value is `l * 8`.
-    - `mapping` *(list)*: This is a mapping of the bits to be folded. This paramater is generated with `fold_parameters = bitfold.gen_param()`. Then you should have `mapping = fold_parameters["mapping"]`.
-    - `ops` *(list)*: This is a list of the operations to be perfomed on the mapping. This paramater is generated with `fold_parameters = bitfold.gen_param()`. Then you should have `ops = fold_parameters["ops"]`.
+   - `value` *(string)*: This is simply the input value that you want to shrink.
+   - `new_size` *(integer)*: The number of bits of the new string that you want to be generated. If you want to output strings of length `l` then this value is `l * 8`.
+   - `mapping` *(list)*: This is a mapping of the bits to be folded. This paramater is generated with `fold_parameters = bitfold.gen_param()`. Then you should have `mapping = fold_parameters["mapping"]`.
+   - `ops` *(list)*: This is a list of the operations to be perfomed on the mapping. This paramater is generated with `fold_parameters = bitfold.gen_param()`. Then you should have `ops = fold_parameters["ops"]`.
 
 *response syntax*
 
