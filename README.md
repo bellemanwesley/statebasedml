@@ -118,11 +118,11 @@ The `fold()` function simply outputs a folded string.
 
 *parameters*
 
-* `datadict` *(dict)*: This is simply the input value that you want to shrink.
-   * `key` *(string)*: .
-      * `result` *(string)*: .
-      * `options` *(list)*: .
-      * `choice` *(string)*: .
+* `datadict` *(dict)*: The function takes a single dictionary with the below values.
+   * `key` *(string)*: The dictionary should include one or more keys. The key is the measured *state* of the system that you want to capture.
+      * `result` *(string)*: Result is the *tag* for that key and, if applicable, choice.
+      * `options` *(list)* \[OPTIONAL\]: .
+      * `choice` *(string)* \[OPTIONAL\]: .
 
 *response syntax*
 
