@@ -117,9 +117,9 @@ The `fold()` function simply outputs a folded string.
 ```
 
 *parameters*
-   - `data` *(dict)*: This is simply the input value that you want to shrink.
-    - `key` *(string)*: .
-        - `result` *(string)*: This is a mapping of the bits to be folded. This paramater is generated with `fold_parameters = bitfold.gen_param()`. Then you should have `mapping = fold_parameters["mapping"]`.
+   - `datadict` *(dict)*: This is simply the input value that you want to shrink.
+      -   `key` *(string)*: .
+        - `result` *(string)*: .
         - `options` *(list)*: .
         - `choice` *(string)*: .
 
