@@ -6,5 +6,7 @@ The statebasedml library has two classes:
 
 ### bitfold
 
-Import bitfold into your project with:
-`from statebasedml import bitfold`
+Installation instructions
+-------------------------
+
+	python setup.py install
