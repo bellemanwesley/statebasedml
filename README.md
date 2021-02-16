@@ -118,10 +118,10 @@ The `fold()` function simply outputs a folded string.
 
 *parameters*
    - `datadict` *(dict)*: This is simply the input value that you want to shrink.
-      -   `key` *(string)*: .
-        - `result` *(string)*: .
-        - `options` *(list)*: .
-        - `choice` *(string)*: .
+       -   `key` *(string)*: .
+          - `result` *(string)*: .
+          - `options` *(list)*: .
+          - `choice` *(string)*: .
 
 *response syntax*
 
