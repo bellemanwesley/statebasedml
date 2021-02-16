@@ -117,6 +117,11 @@ The `fold()` function simply outputs a folded string.
 ```
 
 *parameters*
+
+          * Bullet list
+              * Nested bullet
+                  * Sub-nested bullet etc
+          * Bullet list item 2
    * `datadict` *(dict)*: This is simply the input value that you want to shrink.
        *   `key` *(string)*: .
           * `result` *(string)*: .
