@@ -1,4 +1,10 @@
-# State Based Machine Learning
+statebasedml
+========
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Overview
+
 statebasedml is a Python library for training data on state based machine learning data. 
 
 Installation instructions
@@ -9,18 +15,22 @@ Installation instructions
 
 ## Classes
 The statebasedml library has two classes:
+   - `bitfold`: [compresses states in order to shrink big data](https://medium.com/swlh/shrinking-big-data-with-bit-folding-4ea0aa6a055d)
+   - `data`: trains tests and classified 
 
-### bitfold
+# bitfold
 
-Installation instructions
--------------------------
+### Import statebasedml.bitfold
 
+```python
 	from statebasedml import bitfold
+```
 
-### bitfold
+# data
 
-Installation instructions
--------------------------
+### Import statebasedml.data
 
-	from statebasedml import bitfold
+```python
+	from statebasedml import data
+```
 
