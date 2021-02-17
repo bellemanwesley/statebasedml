@@ -1,4 +1,5 @@
 from copy import copy
+import random
 
 def train(datadict,*args, **kwargs):
     model = kwargs.get('model', {})
@@ -19,6 +20,7 @@ def train(datadict,*args, **kwargs):
                 update_key = {"count":0,"result_dict":{}}
         if "option_dict" in update_key:
             for x in keydata["options"]:
+                assert type(x) == str, "all options must be strings"
                 if x not in update_key["option_dict"]:
                     update_key["option_dict"].update({
                         x:{
@@ -48,4 +50,38 @@ def update(datadict,model):
 def classify(datadict,model):
     classifications = {}
     for key in datadict:
-        if "option_dict" in datadict[key]:
+        desired_result = datadict[key]["desired_result"] 
+        if "options" in datadict[key]:
+            assert "desired_result" in datadict[key], "You must have a desired result if you are providing options"
+            assert type(datadict[key]["options"]) == list, "Options must be a list"
+            if key not in model:
+                choice = random.choice(datadict[key]["options"])
+            else:
+                assert "option_dict" in model[key], "model does not support options for key - "+key
+                option_weights = []
+                for option in datadict[key]["options"]:
+                    option_count = model[key]["option_dict"][option]["count"]
+                    if datadict[key]["desired_result"] in model[key]["option_dict"][option]["result_dict"]:
+                        result_count = model[key]["option_dict"][option]["result_dict"][desired_result]["count"]
+                    else:
+                        result_count = 0
+                    option_weights.append((result_count+1.0)/(option_count+2.0))
+                choice = random.choices(datadict[key]["options"],option_weights,k=1)[0]
+        else:
+            assert "results" in datadict[key], "options or results must be specified"
+            assert type(datadict[key]["results"]) == list, "results value must be a list"
+            assert len(datadict[key]["results"]) > 0, "results value must have at least one element"
+            if key not in model:
+                choice = random.choice(datadict[key]["results"])
+            else:
+                assert "result_dict" in model[key], "model requires options for key - "+key
+                result_weights = []
+                total_count = model[key]["count"]
+                for result in datadict[key]["results"]:
+                    if result in model[key]["result_dict"]:
+                        result_count = model[key]["result_dict"][result]
+                    else:
+                        result_count = 0
+                    result_weights.append((result_count+1.0)/(total_count+2.0))
+                choice = random.choices(datadict[key]["results"],result_weights,k=1)[0]
+        classifications.update({key:choice})

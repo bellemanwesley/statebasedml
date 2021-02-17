@@ -159,6 +159,24 @@ The `fold()` function simply outputs a folded string.
 
 #### update
 
+The update function is similar to the train function, except you add a model to the second argument. In fact, the train function can operate as the update function if you pass a model to it as a `model=model` argument. I just added `update()` for syntatic convenience.
+
+*request syntax*
+
+```python
+
+    updated model = data.update(
+        datadict = datadict,
+        model = model
+    )
+
+```
+
+*parameters*
+
+* `datadict` *(dict)*: This takes the same format as the input specified in the `train()` function above.
+* `model` *(dict)*: This takes the same format as the output specified in the `train()` function above.
+
 #### test
 
 #### classify
@@ -171,12 +189,27 @@ The `fold()` function simply outputs a folded string.
         datadict = {
             "key1": {
                 "options": [option1, option2, ..., optionN],
-                "preferred_result": result
+                "desired_result": result
             },
             ...,
-            "keyN": ...
+            "keyN": {
+                "results": [result1, result2, result3]
+            }
         },
-        model = model_dict
+        model = model,
     )
 
 ```
+
+*response syntax*
+
+    ```python
+
+    {
+        "key1": "string",
+        "key2": "string",
+        ...,
+        "keyN": "string"
+    }
+
+    ```
