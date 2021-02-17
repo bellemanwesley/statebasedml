@@ -90,7 +90,7 @@ The `fold()` function simply outputs a folded string.
 	from statebasedml import data
 ```
 
-*data has 2 methods*
+*data has 4 methods*
    - `train()`: generates a model based on tagged input data
    - `update()`: updates a model with new tagged input data
    - `test()`: tests a trained model based on additional tagged input data
@@ -176,6 +176,10 @@ The update function is similar to the train function, except you add a model to 
 
 * `datadict` *(dict)*: This takes the same format as the input specified in the `train()` function above.
 * `model` *(dict)*: This takes the same format as the output specified in the `train()` function above.
+
+*response syntax*
+
+The `update()` function outputs a model with the same format as the `train()` function above.
 
 #### test
 
