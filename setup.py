@@ -1,11 +1,17 @@
 from setuptools import find_packages, setup
+
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
+
 setup(
     name='statebasedml',
     packages=find_packages(include=['statebasedml']),
-    version='0.0.3',
+    version='0.0.9',
     author='Wesley Belleman',
     author_email="bellemanwesley@gmail.com",
     description="Machine learning package for state based ML.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     url="https://github.com/bellemanwesley/statebasedml",
     license='MIT',
     install_requires=[],
