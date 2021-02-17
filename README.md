@@ -13,6 +13,49 @@ Installation instructions
     python3 -m pip install --upgrade pip
 	python3 -m pip install statebasedml
 
+## Basic Example
+
+I start here with an example - detailed documentation is below. Here we train the model which numbers are even and which numbers are odd. If you run this script, you should get an accuracy of over 0.99.
+
+```python
+
+    model = {}
+    for i in range(10000):
+        x = random.randint(0,9)
+        guess = random.randint(0,1)
+        if guess == x%2:
+            result = "correct"
+        else:
+            result = "wrong"
+        test_dict = {
+            str(x): {
+                "result": result,
+                "options": ["0","1"],
+                "choice": str(guess)
+            }
+        }
+        model = data.update(datadict=test_dict,model=model)
+    accuracy = 0
+    for i in range(1000):
+        x = random.randint(0,9)
+        test_dict = {
+            str(x) : {
+                "options": ["0","1"],
+                "desired_result": "correct"
+            }
+        }
+        classify_dict = data.classify(datadict=test_dict,model=model)
+        classification = classify_dict[str(x)]
+        if classification == str(x%2):
+            accuracy = (accuracy*i + 1)/(i+1)
+        else:
+            accuracy = (accuracy*i)/(i+1)
+    return accuracy
+
+print(odd_even_test())
+
+```
+
 ## Classes
 The statebasedml library has two classes:
    - `bitfold`: [compresses states in order to shrink big data](https://medium.com/swlh/shrinking-big-data-with-bit-folding-4ea0aa6a055d)
@@ -20,7 +63,7 @@ The statebasedml library has two classes:
 
 # bitfold
 
-*Import statebasedml.bitfold*
+*import statebasedml.bitfold*
 
 ```python
 	from statebasedml import bitfold
@@ -84,7 +127,7 @@ The `fold()` function simply outputs a folded string.
 
 # data
 
-### Import statebasedml.data
+*import statebasedml.data*
 
 ```python
 	from statebasedml import data

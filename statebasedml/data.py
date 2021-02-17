@@ -9,8 +9,6 @@ def train(datadict,*args, **kwargs):
             assert type(keydata["options"]) == list, "options parameter must be list"
             assert "choice" in keydata, "Must have choice parameter if you have options parameter"
             assert keydata["choice"] in keydata["options"], "Choice parameter must be item in options parameter"
-            if key in model:
-                assert model[key]["options"] == True, "All keys with the same value must share options settings"
         if key in model:
             update_key = copy(model[key])
         else:
@@ -45,7 +43,7 @@ def train(datadict,*args, **kwargs):
     return model
 
 def update(datadict,model):
-    return train(datadict,model)
+    return train(datadict,model=model)
 
 def classify(datadict,model):
     classifications = {}
@@ -62,7 +60,7 @@ def classify(datadict,model):
                 for option in datadict[key]["options"]:
                     option_count = model[key]["option_dict"][option]["count"]
                     if datadict[key]["desired_result"] in model[key]["option_dict"][option]["result_dict"]:
-                        result_count = model[key]["option_dict"][option]["result_dict"][desired_result]["count"]
+                        result_count = model[key]["option_dict"][option]["result_dict"][desired_result]
                     else:
                         result_count = 0
                     option_weights.append((result_count+1.0)/(option_count+2.0))
@@ -85,3 +83,5 @@ def classify(datadict,model):
                     result_weights.append((result_count+1.0)/(total_count+2.0))
                 choice = random.choices(datadict[key]["results"],result_weights,k=1)[0]
         classifications.update({key:choice})
+    return classifications        
+
