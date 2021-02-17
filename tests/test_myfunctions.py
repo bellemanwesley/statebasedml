@@ -10,21 +10,24 @@ def simple_test():
 
 def odd_even_test():
     model = {}
-    for i in range(10000):
-        x = random.randint(0,9)
-        guess = random.randint(0,1)
-        if guess == x%2:
-            result = "correct"
-        else:
-            result = "wrong"
-        test_dict = {
-            str(x): {
-                "result": result,
-                "options": ["0","1"],
-                "choice": str(guess)
+    test_list = []
+    for j in range(10):
+        for i in range(100):
+            x = random.randint(0,9)
+            guess = random.randint(0,1)
+            if guess == x%2:
+                result = "correct"
+            else:
+                result = "wrong"
+            test_dict = {
+                str(x): {
+                    "result": result,
+                    "options": ["0","1"],
+                    "choice": str(guess)
+                }
             }
-        }
-        model = data.update(datadict=test_dict,model=model)
+            test_list.append(test_dict)
+        model = data.update(datalist=test_list,model=model)
     accuracy = 0
     for i in range(1000):
         x = random.randint(0,9)
@@ -42,3 +45,6 @@ def odd_even_test():
             accuracy = (accuracy*i)/(i+1)
     assert accuracy > 0.99
     return accuracy
+
+print(odd_even_test())
+

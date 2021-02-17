@@ -146,22 +146,28 @@ The `fold()` function simply outputs a folded string.
 ```python
 
     trained_model = data.train(
-        datadict = {
-            "key1": {
-                "result": string,
-                "options": [option1, option2, ..., optionN],
-                "choice": optionN
+        datalist = [
+            {
+                "key1": {
+                    "result": string,
+                    "options": [option1, option2, ..., optionN],
+                    "choice": optionN
+                }
             },
-            ...,
-            "keyN": ...
-        }
+            {
+                ...
+            },
+            {
+                "keyN": ...
+            }
+        ]
     )
 
 ```
 
 *parameters*
 
-* `datadict` *(dict)*: The function takes a single dictionary with the below values.
+* `datalist` *(list)*: The function takes a single list of dictionaries with the below key/value pairs.
    * `key` *(string)*: The dictionary should include one or more keys. The key is the measured *state* of the system that you want to capture.
       * `result` *(string)*: Result is the *tag* for that key and, if applicable, choice.
       * `options` *(list)* \[OPTIONAL\]: .
@@ -169,7 +175,7 @@ The `fold()` function simply outputs a folded string.
 
 *response syntax*
 
-    ```python
+```python
 
     {
         "key1": {
@@ -198,7 +204,7 @@ The `fold()` function simply outputs a folded string.
         }
     }
 
-    ```
+```
 
 ## update
 
@@ -209,7 +215,7 @@ The update function is similar to the train function, except you add a model to 
 ```python
 
     updated_model = data.update(
-        datadict = datadict,
+        datalist = datalist,
         model = model
     )
 
@@ -217,7 +223,7 @@ The update function is similar to the train function, except you add a model to 
 
 *parameters*
 
-* `datadict` *(dict)*: This takes the same format as the input specified in the `train()` function above.
+* `datalist` *(list)*: This takes the same format as the input specified in the `train()` function above.
 * `model` *(dict)*: This takes the same format as the output specified in the `train()` function above.
 
 *response syntax*
