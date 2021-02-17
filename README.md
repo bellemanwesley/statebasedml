@@ -19,6 +19,7 @@ I start here with an example - detailed documentation is below. Here we train th
 
 ```python
 
+def odd_even_test():
     model = {}
     for i in range(10000):
         x = random.randint(0,9)
@@ -168,10 +169,10 @@ The `fold()` function simply outputs a folded string.
 *parameters*
 
 * `datalist` *(list)*: The function takes a single list of dictionaries with the below key/value pairs.
-   * `key` *(string)*: The dictionary should include one or more keys. The key is the measured *state* of the system that you want to capture.
-      * `result` *(string)*: Result is the *tag* for that key and, if applicable, choice.
-      * `options` *(list)* \[OPTIONAL\]: .
-      * `choice` *(string)* \[OPTIONAL\]: .
+   * `key` *(string)*: Each dictionary should include one or more keys. The key is the measured *state* of the system that you want to capture. One key per list item is recommended, but the function will accept multiple keys per list item.
+      * `result` *(string)*: The result is the *tag* associated with that key. If you are using options, then the tag is associated with the key/choice pair.
+      * `options` *(list)* \[OPTIONAL\]: Only use options if you have additional options associated with your state. One example of when to use options is for teaching the model to play board games. In this case, the state is the configuration of the board and options are possible moves.
+      * `choice` *(string)* \[OPTIONAL\]: The choice parameter is required if you are using options. The choice must be a member of the options list. The choice parameter is the choice made to achieve the provided result. 
 
 *response syntax*
 
@@ -232,6 +233,34 @@ The `update()` function outputs a model with the same format as the `train()` fu
 
 ## test
 
+*request syntax*
+
+```python
+
+    model_performance = data.test(
+        datalist = datalist,
+        model = model
+    )
+
+```
+
+*parameters*
+
+* `datalist` *(list)*: This takes the same format as the input specified in the `train()` function above.
+* `model` *(dict)*: This takes the same format as the output specified in the `train()` function above.
+
+*response syntax*
+
+    ```python
+
+    {
+        "accuracy": 0.123,
+        "loss": 1.23,
+    }
+
+    ```
+
+
 ## classify
 
 *request syntax*
@@ -239,17 +268,19 @@ The `update()` function outputs a model with the same format as the `train()` fu
 ```python
 
     classifications = data.classify(
-        datadict = {
-            "key1": {
-                "options": [option1, option2, ..., optionN],
-                "desired_result": result
+        datalist = [
+            {
+                "key1": {
+                    "options": [option1, option2, ..., optionN],
+                    "desired_result": result
+                },
+                ...,
+                "keyN": {
+                    "results": [result1, result2, result3]
+                }
             },
-            ...,
-            "keyN": {
-                "results": [result1, result2, result3]
-            }
-        },
-        model = model,
+        ]
+        model = model
     )
 
 ```
@@ -258,11 +289,10 @@ The `update()` function outputs a model with the same format as the `train()` fu
 
     ```python
 
-    {
-        "key1": "string",
-        "key2": "string",
+    [
+        {"key1": "string"},
         ...,
-        "keyN": "string"
-    }
+        {"keyN": "string"}
+    ]
 
     ```
