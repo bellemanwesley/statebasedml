@@ -73,7 +73,7 @@ The statebasedml library has two classes:
    - `gen_param()`: generates the parameters for a fold
    - `fold()`: actually folds the input data
 
-#### gen_param
+### gen_param
 
 *request syntax*
 
@@ -100,7 +100,7 @@ The statebasedml library has two classes:
     ```
 
 
-#### fold
+### fold
 
 *request syntax*
 
@@ -139,7 +139,7 @@ The `fold()` function simply outputs a folded string.
    - `test()`: tests a trained model based on additional tagged input data
    - `classify()`: classifies untagged data using a provided model
 
-#### train
+### train
 
 *request syntax*
 
@@ -200,7 +200,7 @@ The `fold()` function simply outputs a folded string.
 
     ```
 
-#### update
+### update
 
 The update function is similar to the train function, except you add a model to the second argument. In fact, the train function can operate as the update function if you pass a model to it as a `model=model` argument. I just added `update()` for syntatic convenience.
 
@@ -224,9 +224,9 @@ The update function is similar to the train function, except you add a model to 
 
 The `update()` function outputs a model with the same format as the `train()` function above.
 
-#### test
+### test
 
-#### classify
+### classify
 
 *request syntax*
 
