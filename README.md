@@ -208,7 +208,7 @@ The update function is similar to the train function, except you add a model to 
 
 ```python
 
-    updated model = data.update(
+    updated_model = data.update(
         datadict = datadict,
         model = model
     )
