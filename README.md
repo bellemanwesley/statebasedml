@@ -48,14 +48,14 @@ The statebasedml library has two classes:
 
 *response syntax*
 
-    ```python
+```python
 
     {
         "mapping":mapping,
         "ops":ops
     }
 
-    ```
+```
 
 
 ## fold
@@ -208,14 +208,14 @@ The `update()` function outputs a model with the same format as the `train()` fu
 
 *response syntax*
 
-    ```python
+```python
 
     {
         "accuracy": 0.123,
         "loss": 1.23,
     }
 
-    ```
+```
 
 
 ## classify
@@ -244,7 +244,7 @@ The `update()` function outputs a model with the same format as the `train()` fu
 
 *response syntax*
 
-    ```python
+```python
 
     [
         {"key1": "string"},
@@ -252,4 +252,4 @@ The `update()` function outputs a model with the same format as the `train()` fu
         {"keyN": "string"}
     ]
 
-    ```
+```
