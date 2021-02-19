@@ -9,7 +9,7 @@ setup(
     version='0.0.11',
     author='Wesley Belleman',
     author_email="bellemanwesley@gmail.com",
-    description="Machine learning package for state based ML.",
+    description="Train data with state based machine learning.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/bellemanwesley/statebasedml",
