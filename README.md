@@ -5,7 +5,7 @@ statebasedml
 
 ## Overview
 
-statebasedml is a Python library for training data with state based machine learning. 
+statebasedml is a Python library for training data with state based machine learning. The documentation below should help you understand the parameters passed to the statebasedml functions and what they return, but I recommend starting with examples. Check out the examples in the [samples folder](/samples)
 
 Installation instructions
 -------------------------
