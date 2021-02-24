@@ -212,7 +212,7 @@ The `update()` function outputs a model with the same format as the `train()` fu
 
     {
         "accuracy": 0.123,
-        "loss": 1.23,
+        "loss": 1.23
     }
 
 ```

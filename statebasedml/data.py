@@ -1,5 +1,6 @@
 from copy import copy
 import random
+import numpy
 
 def train(datalist,*args, **kwargs):
     model = kwargs.get('model', {})
@@ -88,4 +89,42 @@ def classify(datalist,model):
             classifications.update({key:choice})
         class_list.append(classifications)
     return class_list        
+
+def test(datalist,model):
+    loss = 0
+    correct_class = 0.0
+    total_class = 0
+    for datadict in datalist:
+        total_class += len(datadict)
+        for key in datadict:
+            keydict = datadict[key]
+            keymodel = model[key]
+            if "options" in keydict:
+                assert "choice" in keydict, "all entries with 'options' must also have 'choice'"
+                choice = keydict["choice"]
+                assert choice in keydict["options"], "'choice' must be in 'options' list"
+                assert "option_dict" in keymodel, "model does not support options for key "+key
+                if choice in keymodel["option_dict"]:
+                    total_count = keymodel["option_dict"][choice]["count"]
+                    if keydict["result"] in keymodel["option_dict"][choice]["result_dict"]:
+                        result_count = keymodel["option_dict"][choice]["result_dict"][keydict["result"]]
+                    else:
+                        result_count = 0
+                    prob_result = float(result_count+1)/(total_count+2)
+                else:
+                    prob_result = 0.5
+            else:
+                assert "result_dict" in keymodel, "model requires options for key "+key
+                result = keydict["result"]
+                total_count = keymodel["count"]
+                if result in keymodel["result_dict"]:
+                    result_count = keymodel["result_dict"][result]
+                else:
+                    result_count = 0
+                prob_result = float(result_count+1)/(total_count+2)
+            loss += -1*numpy.log(prob_result)
+            correct_class += prob_result
+    accuracy = correct_class/total_class
+    return {"accuracy":accuracy,"loss":loss}
+
 
