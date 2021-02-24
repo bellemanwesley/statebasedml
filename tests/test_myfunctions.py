@@ -29,27 +29,25 @@ def odd_even_test():
             test_list.append(test_dict)
         model = data.update(datalist=test_list,model=model)
     accuracy_list = []
-    for i in range(100):
+    for j in range(100):
         test_list = []
-        for j in range(100):
+        for i in range(100):
             x = random.randint(0,9)
+            guess = random.randint(0,1)
+            if guess == x%2:
+                result = "correct"
+            else:
+                result = "wrong"
             test_dict = {
-                str(x) : {
+                str(x): {
+                    "result": result,
                     "options": ["0","1"],
-                    "desired_result": "correct"
+                    "choice": str(guess)
                 }
             }
             test_list.append(test_dict)
-        class_list = data.classify(datalist=test_list,model=model)
-        for j in range(len(test_list)):
-            for x in test_list[j]:
-                choice = class_list[j][x]
-                accuracy_list.append(choice==str(int(x)%2))
-    correct = len(list(filter(lambda x: x==True,accuracy_list)))
-    total = len(accuracy_list)
-    accuracy = float(correct)/total
-    assert accuracy > 0.99
-    return accuracy
+        accuracy_list.append(data.test(datalist=test_list,model=model))
+    return accuracy_list[0]
 
 print(odd_even_test())
 
