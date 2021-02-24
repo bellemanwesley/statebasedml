@@ -10,35 +10,46 @@ def simple_test():
 
 def odd_even_test():
     model = {}
-    for i in range(10000):
-        x = random.randint(0,9)
-        guess = random.randint(0,1)
-        if guess == x%2:
-            result = "correct"
-        else:
-            result = "wrong"
-        test_dict = {
-            str(x): {
-                "result": result,
-                "options": ["0","1"],
-                "choice": str(guess)
+    for j in range(100):
+        test_list = []
+        for i in range(100):
+            x = random.randint(0,9)
+            guess = random.randint(0,1)
+            if guess == x%2:
+                result = "correct"
+            else:
+                result = "wrong"
+            test_dict = {
+                str(x): {
+                    "result": result,
+                    "options": ["0","1"],
+                    "choice": str(guess)
+                }
             }
-        }
-        model = data.update(datadict=test_dict,model=model)
-    accuracy = 0
-    for i in range(1000):
-        x = random.randint(0,9)
-        test_dict = {
-            str(x) : {
-                "options": ["0","1"],
-                "desired_result": "correct"
+            test_list.append(test_dict)
+        model = data.update(datalist=test_list,model=model)
+    accuracy_list = []
+    for i in range(100):
+        test_list = []
+        for j in range(100):
+            x = random.randint(0,9)
+            test_dict = {
+                str(x) : {
+                    "options": ["0","1"],
+                    "desired_result": "correct"
+                }
             }
-        }
-        classify_dict = data.classify(datadict=test_dict,model=model)
-        classification = classify_dict[str(x)]
-        if classification == str(x%2):
-            accuracy = (accuracy*i + 1)/(i+1)
-        else:
-            accuracy = (accuracy*i)/(i+1)
+            test_list.append(test_dict)
+        class_list = data.classify(datalist=test_list,model=model)
+        for j in range(len(test_list)):
+            for x in test_list[j]:
+                choice = class_list[j][x]
+                accuracy_list.append(choice==str(int(x)%2))
+    correct = len(list(filter(lambda x: x==True,accuracy_list)))
+    total = len(accuracy_list)
+    accuracy = float(correct)/total
     assert accuracy > 0.99
     return accuracy
+
+print(odd_even_test())
+

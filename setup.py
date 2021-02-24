@@ -6,10 +6,10 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name='statebasedml',
     packages=find_packages(include=['statebasedml']),
-    version='0.0.9',
+    version='0.0.11',
     author='Wesley Belleman',
     author_email="bellemanwesley@gmail.com",
-    description="Machine learning package for state based ML.",
+    description="Train data with state based machine learning.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/bellemanwesley/statebasedml",

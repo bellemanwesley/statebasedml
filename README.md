@@ -5,7 +5,7 @@ statebasedml
 
 ## Overview
 
-statebasedml is a Python library for training data on state based machine learning data. 
+statebasedml is a Python library for training data with state based machine learning. The documentation below should help you understand the parameters passed to the statebasedml functions and what they return, but I recommend starting with examples. Check out the examples in the [samples folder](/samples)
 
 Installation instructions
 -------------------------
@@ -13,53 +13,11 @@ Installation instructions
     python3 -m pip install --upgrade pip
 	python3 -m pip install statebasedml
 
-## Basic Example
-
-I start here with an example - detailed documentation is below. Here we train the model which numbers are even and which numbers are odd. If you run this script, you should get an accuracy of over 0.99.
-
-```python
-
-    model = {}
-    for i in range(10000):
-        x = random.randint(0,9)
-        guess = random.randint(0,1)
-        if guess == x%2:
-            result = "correct"
-        else:
-            result = "wrong"
-        test_dict = {
-            str(x): {
-                "result": result,
-                "options": ["0","1"],
-                "choice": str(guess)
-            }
-        }
-        model = data.update(datadict=test_dict,model=model)
-    accuracy = 0
-    for i in range(1000):
-        x = random.randint(0,9)
-        test_dict = {
-            str(x) : {
-                "options": ["0","1"],
-                "desired_result": "correct"
-            }
-        }
-        classify_dict = data.classify(datadict=test_dict,model=model)
-        classification = classify_dict[str(x)]
-        if classification == str(x%2):
-            accuracy = (accuracy*i + 1)/(i+1)
-        else:
-            accuracy = (accuracy*i)/(i+1)
-    return accuracy
-
-print(odd_even_test())
-
-```
-
 ## Classes
 The statebasedml library has two classes:
    - `bitfold`: [compresses states in order to shrink big data](https://medium.com/swlh/shrinking-big-data-with-bit-folding-4ea0aa6a055d)
    - `data`: trains, tests, and classifies input datasets 
+   - `pack`: packs strings into shorter strings without losing information
 
 # bitfold
 
@@ -73,7 +31,7 @@ The statebasedml library has two classes:
    - `gen_param()`: generates the parameters for a fold
    - `fold()`: actually folds the input data
 
-#### gen_param
+## gen_param
 
 *request syntax*
 
@@ -90,17 +48,17 @@ The statebasedml library has two classes:
 
 *response syntax*
 
-    ```python
+```python
 
     {
         "mapping":mapping,
         "ops":ops
     }
 
-    ```
+```
 
 
-#### fold
+## fold
 
 *request syntax*
 
@@ -139,37 +97,43 @@ The `fold()` function simply outputs a folded string.
    - `test()`: tests a trained model based on additional tagged input data
    - `classify()`: classifies untagged data using a provided model
 
-#### train
+## train
 
 *request syntax*
 
 ```python
 
     trained_model = data.train(
-        datadict = {
-            "key1": {
-                "result": string,
-                "options": [option1, option2, ..., optionN],
-                "choice": optionN
+        datalist = [
+            {
+                "key1": {
+                    "result": string,
+                    "options": [option1, option2, ..., optionN],
+                    "choice": optionN
+                }
             },
-            ...,
-            "keyN": ...
-        }
+            {
+                ...
+            },
+            {
+                "keyN": ...
+            }
+        ]
     )
 
 ```
 
 *parameters*
 
-* `datadict` *(dict)*: The function takes a single dictionary with the below values.
-   * `key` *(string)*: The dictionary should include one or more keys. The key is the measured *state* of the system that you want to capture.
-      * `result` *(string)*: Result is the *tag* for that key and, if applicable, choice.
-      * `options` *(list)* \[OPTIONAL\]: .
-      * `choice` *(string)* \[OPTIONAL\]: .
+* `datalist` *(list)*: The function takes a single list of dictionaries with the below key/value pairs.
+   * `key` *(string)*: Each dictionary should include one or more keys. The key is the measured *state* of the system that you want to capture. One key per list item is recommended, but the function will accept multiple keys per list item.
+      * `result` *(string)*: The result is the *tag* associated with that key. If you are using options, then the tag is associated with the key/choice pair.
+      * `options` *(list)* \[OPTIONAL\]: Only use options if you have additional options associated with your state. One example of when to use options is for teaching the model to play board games. In this case, the state is the configuration of the board and options are possible moves.
+      * `choice` *(string)* \[OPTIONAL\]: The choice parameter is required if you are using options. The choice must be a member of the options list. The choice parameter is the choice made to achieve the provided result. 
 
 *response syntax*
 
-    ```python
+```python
 
     {
         "key1": {
@@ -198,9 +162,9 @@ The `fold()` function simply outputs a folded string.
         }
     }
 
-    ```
+```
 
-#### update
+## update
 
 The update function is similar to the train function, except you add a model to the second argument. In fact, the train function can operate as the update function if you pass a model to it as a `model=model` argument. I just added `update()` for syntatic convenience.
 
@@ -208,8 +172,8 @@ The update function is similar to the train function, except you add a model to 
 
 ```python
 
-    updated model = data.update(
-        datadict = datadict,
+    updated_model = data.update(
+        datalist = datalist,
         model = model
     )
 
@@ -217,46 +181,75 @@ The update function is similar to the train function, except you add a model to 
 
 *parameters*
 
-* `datadict` *(dict)*: This takes the same format as the input specified in the `train()` function above.
+* `datalist` *(list)*: This takes the same format as the input specified in the `train()` function above.
 * `model` *(dict)*: This takes the same format as the output specified in the `train()` function above.
 
 *response syntax*
 
 The `update()` function outputs a model with the same format as the `train()` function above.
 
-#### test
+## test
 
-#### classify
+*request syntax*
+
+```python
+
+    model_performance = data.test(
+        datalist = datalist,
+        model = model
+    )
+
+```
+
+*parameters*
+
+* `datalist` *(list)*: This takes the same format as the input specified in the `train()` function above.
+* `model` *(dict)*: This takes the same format as the output specified in the `train()` function above.
+
+*response syntax*
+
+```python
+
+    {
+        "accuracy": 0.123,
+        "loss": 1.23,
+    }
+
+```
+
+
+## classify
 
 *request syntax*
 
 ```python
 
     classifications = data.classify(
-        datadict = {
-            "key1": {
-                "options": [option1, option2, ..., optionN],
-                "desired_result": result
+        datalist = [
+            {
+                "key1": {
+                    "options": [option1, option2, ..., optionN],
+                    "desired_result": result
+                },
+                ...,
+                "keyN": {
+                    "results": [result1, result2, result3]
+                }
             },
-            ...,
-            "keyN": {
-                "results": [result1, result2, result3]
-            }
-        },
-        model = model,
+        ]
+        model = model
     )
 
 ```
 
 *response syntax*
 
-    ```python
+```python
 
-    {
-        "key1": "string",
-        "key2": "string",
+    [
+        {"key1": "string"},
         ...,
-        "keyN": "string"
-    }
+        {"keyN": "string"}
+    ]
 
-    ```
+```
