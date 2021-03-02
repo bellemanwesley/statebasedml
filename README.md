@@ -17,7 +17,6 @@ Installation instructions
 The statebasedml library has two classes:
    - `bitfold`: [compresses states in order to shrink big data](https://medium.com/swlh/shrinking-big-data-with-bit-folding-4ea0aa6a055d)
    - `data`: trains, tests, and classifies input datasets 
-   - `pack`: packs strings into shorter strings without losing information
 
 # bitfold
 
